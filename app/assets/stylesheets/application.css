@@ -20,6 +20,25 @@ body {
 
 }
 
+#main-nav {
+  font-weight: 500;
+  color: black;
+}
+
+#main-nav a {
+  font-weight: 500;
+  color: black;
+}
+
+#brand {
+  font-size: 1.3em;
+}
+
+#nav-bar-right a {
+  font-size: 1.0em;
+  font-weight: 700;
+}
+
 .home-intro-container {
   width: 1000px;
   margin: auto;
@@ -53,4 +72,8 @@ p {
 
 .new-poll-centre-form {
   text-align: center;
+}
+
+#nav-bar-background {
+  background-color: white;
 }
