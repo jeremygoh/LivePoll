@@ -11,6 +11,9 @@ class PollCentresController < ApplicationController
   # GET /poll_centres/1.json
   def show_admin
     @poll_centre = PollCentre.find_by(title: params[:title])
+    if current_user.id != @poll_centre.id
+      redirect_to @poll_centre.title
+    end
     @question = Question.new
     @unasked_questions = @poll_centre.unasked_questions
     @current_question = @poll_centre.current_question
