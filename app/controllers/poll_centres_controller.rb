@@ -40,7 +40,7 @@ class PollCentresController < ApplicationController
   # GET /poll_centres/new
   def new
     if !user_signed_in?
-      redirect_to "welcome#index"
+      redirect_to "/"
     end
     @poll_centre = PollCentre.new
     @user_answer_poll_centres = nil
