@@ -379,3 +379,7 @@ p {
   margin-top: 30px;
   margin-bottom: -31px;
 }
+
+.result-icon {
+  float:right;
+}

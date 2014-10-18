@@ -45,9 +45,9 @@
       <% if @asked_questions %>
         <% @asked_questions.each do |question| %>
           <div class="panel panel-default asked-question">
-            <div class="panel-heading my-panel-heading panel-heading-toggle" <% if @user.correct?(question.id) %>style="background-color:rgb(134, 218, 134) !important; color:white !important"  <% else%>style="background-color: rgb(242, 135, 132) !important; color:white !important"<% end %>>
+            <div class="panel-heading my-panel-heading panel-heading-toggle">
               <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
-              <span class="answered-total-votes">Total Votes: <%= question.total_votes %></span>
+              <% if @user.correct?(question.id) %><span class="result-icon glyphicon glyphicon-ok"></span><% else%><span class="glyphicon glyphicon-remove result-icon"></span><% end %>
             </div>
             <div class="panel-body asked-question-body panel-body-toggle">
               <ul class="asked-options">
@@ -157,7 +157,7 @@ $(".vote-btn").click(function(e) {
         //remove attribute from any that hae it
         $(".selected-vote-btn").removeClass("selected-vote-btn");
 
-        selected = voteLetter; //global scope??!!!
+        window.selected = voteLetter; //global scope??!!!
         $(thisObject).addClass("selected-vote-btn");
       }
       // dataType: dataType
@@ -186,6 +186,7 @@ $(".vote-btn").click(function(e) {
         var questionId = $(this).attr("question-id");
         var voteLetter = $(this).attr("value");
         console.log(questionId);
+        console.log()
         var thisObject = this;
         $.ajax({
           type: "POST",
@@ -199,7 +200,7 @@ $(".vote-btn").click(function(e) {
             //remove attribute from any that hae it
             $(".selected-vote-btn").removeClass("selected-vote-btn");
 
-            selected = voteLetter; //global scope??!!!
+            window.selected = voteLetter; //global scope??!!!
             $(thisObject).addClass("selected-vote-btn");
           }
           // dataType: dataType
@@ -214,7 +215,6 @@ $(".vote-btn").click(function(e) {
     $('#current-question-header').css("font-weight", 600);
     var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
     $('.current-question-votes').text("Final Vote Count: " + sum);
-
     var aPercent = "";
     var bPercent = "";
     var cPercent = "";
@@ -225,11 +225,11 @@ $(".vote-btn").click(function(e) {
       cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
       dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
     }
-
-    if(selected == data.correct_answer) {
-      $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + '</li></ul></div><div class="result-text"><p>Correct Answer: ' + data.correct_answer + '<p>You selected ' + selected.toUpperCase() + '. Good job!</div>');
+    console.log("selected is", window.selected);
+    if(window.selected == data.correct_answer.toLowerCase()) {
+      $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + '</li></ul></div><div class="result-text"><p>Correct Answer: ' + data.correct_answer + '<p>You selected ' + window.selected.toUpperCase() + '. Good job!</div>');
     } else {
-      $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + '</li></ul></div><div class="result-text"><p>Correct Answer: ' + data.correct_answer + '<p>You selected ' + selected.toUpperCase() + ".  It's all a numbers game anyway</div>");
+      $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + '</li></ul></div><div class="result-text"><p>Correct Answer: ' + data.correct_answer + '<p>You selected ' + window.selected.toUpperCase() + ".  It's all a numbers game anyway</div>");
     }
 
     $(".vote-options-container").text("");
@@ -237,7 +237,13 @@ $(".vote-btn").click(function(e) {
     $(".options").css("display", "inline-block");
     $(".end-link").text("");
     if(sum > 0) {
-     $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question_text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.option_a + '</li><li>B: ' + data.option_b + '</li><li>C: ' + data.option_c + '</li><li>D: ' + data.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + aPercent +'</li><li>' + data.option_b_votes + bPercent + '</li><li>' + data.option_c_votes + cPercent +'</li><li>' + data.option_d_votes + dPercent + '</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p><p>You selected: ' + selected.toUpperCase() +'</p></div>');
+
+     if(data.correct_answer == window.selected.toUpperCase()) {
+       $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question_text + '</h3><span class="result-icon glyphicon glyphicon-ok"></span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.option_a + '</li><li>B: ' + data.option_b + '</li><li>C: ' + data.option_c + '</li><li>D: ' + data.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + aPercent +'</li><li>' + data.option_b_votes + bPercent + '</li><li>' + data.option_c_votes + cPercent +'</li><li>' + data.option_d_votes + dPercent + '</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p><p>You selected: ' + window.selected.toUpperCase() +'</p></div>');
+     } else {
+       $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question_text + '</h3><span class="result-icon glyphicon glyphicon-remove"></span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.option_a + '</li><li>B: ' + data.option_b + '</li><li>C: ' + data.option_c + '</li><li>D: ' + data.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + aPercent +'</li><li>' + data.option_b_votes + bPercent + '</li><li>' + data.option_c_votes + cPercent +'</li><li>' + data.option_d_votes + dPercent + '</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p><p>You selected: ' + window.selected.toUpperCase() +'</p></div>');
+     }
+
     }
 
     var newQuestionHeaderToggle = $(".asked-question:first").children()[0];
