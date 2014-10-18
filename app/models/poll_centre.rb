@@ -16,4 +16,8 @@ class PollCentre < ActiveRecord::Base
   def has_unasked_questions?
     Question.where(poll_centre_id: self.id, started: false).exists?
   end
+
+  def unasked_questions
+    Question.where(poll_centre_id: self.id, started: false)
+  end
 end

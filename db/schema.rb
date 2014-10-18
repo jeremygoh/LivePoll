@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018061211) do
+ActiveRecord::Schema.define(version: 20141018063704) do
 
   create_table "poll_centres", force: true do |t|
     t.string   "title"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20141018061211) do
     t.string   "option_b"
     t.string   "option_c"
     t.string   "option_d"
-    t.boolean  "started"
-    t.boolean  "finished"
+    t.boolean  "started",        default: false
+    t.boolean  "finished",       default: false
     t.integer  "answer"
     t.datetime "created_at"
     t.datetime "updated_at"

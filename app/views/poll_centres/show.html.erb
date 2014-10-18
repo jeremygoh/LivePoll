@@ -66,13 +66,32 @@
 
 
     </div>
+
     <div class="unasked-questions">
       <h4 class="poll-centre-show-title">
         Unasked Questions
       </h4>
-      all your unasked questions, collapsed
+      <% if @unasked_questions %>
+        <% @unasked_questions.each do |question| %>
+          <div class="panel panel-default unasked-question">
+            <div class="panel-heading my-panel-heading panel-heading-toggle">
+              <h3 class="panel-title unasked-question-title">Q: <%= question.text %></h3><span class="caret panel-caret"></span>
+            </div>
+            <div class="panel-body unasked-question-body panel-body-toggle">
+              <ul>
+                <li>A: <%= question.option_a %></li>
+                <li>B: <%= question.option_b %></li>
+                <li>C: <%= question.option_c %></li>
+                <li>D: <%= question.option_d %></li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
+
+
 
   <div class="asked-questions">
     <h4 class="poll-centre-show-title">
@@ -80,6 +99,10 @@
     </h4>
     already asked questions, collapsed, can see results
   </div>
-
-
 </div>
+
+<script>
+$(".panel-heading-toggle").click(function(){
+  $(this).nextAll(".panel-body-toggle:first").toggle();
+});
+</script>

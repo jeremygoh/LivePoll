@@ -12,6 +12,7 @@ class PollCentresController < ApplicationController
   def show
     @poll_centre = PollCentre.find_by(title: params[:title])
     @question = Question.new
+    @unasked_questions = @poll_centre.unasked_questions
   end
 
   # GET /poll_centres/new

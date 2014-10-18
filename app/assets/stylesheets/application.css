@@ -173,3 +173,25 @@ p {
 .radio-answer {
   padding: 10px;
 }
+
+.my-panel-heading {
+  background-image: none !important;
+}
+
+.panel-default>.panel-heading {
+  background-color: #428bca !important;
+  color: white !important;
+}
+
+.panel-title {
+  display: inline-block;
+}
+
+.panel-caret {
+  float:right;
+  margin-top: 10px;
+}
+
+.panel-body-toggle {
+  display: none;
+}
