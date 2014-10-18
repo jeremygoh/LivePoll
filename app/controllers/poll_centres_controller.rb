@@ -20,6 +20,7 @@ class PollCentresController < ApplicationController
   def show
     #TO DO: if admin should redirect to admin version
     @poll_centre = PollCentre.find_by(title: params[:title])
+    @current_question = @poll_centre.current_question
   end
 
   # GET /poll_centres/new

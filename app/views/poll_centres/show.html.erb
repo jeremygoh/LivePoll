@@ -18,6 +18,14 @@
           <li class="option-c">C: <%= @current_question.option_c %></li>
           <li class="option-d">D: <%= @current_question.option_d %></li>
         </ul>
+        <div class="vote-options-container">
+          <ul class="vote-options">
+            <li class="vote-option vote-option-a"><button href="#" class='btn vote-btn' value='a'>A</button></li>
+            <li class="vote-option vote-option-b"><button href="#" class='btn vote-btn' value='b'>B</button></li>
+            <li class="vote-option vote-option-c"><button href="#" class='btn vote-btn' value='c'>C</button></li>
+            <li class="vote-option vote-option-d"><button href="#" class='btn vote-btn' value='d'>D</button></li>
+          </ul>
+        </div>
         <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
       <% elsif %>
         <div class="current-question-prompt">

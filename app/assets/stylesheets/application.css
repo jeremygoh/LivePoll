@@ -342,3 +342,30 @@ p {
   margin-right: 16px;
   margin-top: 16px;
 }
+
+.vote-options {
+  list-style-type: none;
+}
+
+.vote-option {
+  display: inline;
+}
+
+.vote-options-container {
+  text-align: center;
+  margin-top: 50px;
+}
+.vote-btn {
+  background: white;
+  border: 1px solid #A9A9A9 !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  border-radius: 8px !important;
+  margin-left: 2px !important;
+  margin-right: 22px !important;
+}
+
+.vote-btn:hover {
+  background-color: #428bca;
+  color: white !important;
+}
