@@ -36,7 +36,7 @@
     <div class="add-question">
       <div class="add-question-header-toggle">
         <h4 class="poll-centre-show-title">
-          Create a question
+          Add a question
         </h4><span class="caret add-question-caret"></span>
       </div>
       <div class="add-more-questions">
@@ -108,7 +108,7 @@
               <h3 class="panel-title unasked-question-title">Q: <%= question.text %></h3><a class="ask-link" href="#"><span class="ask-button" id="<%= "ask-" + question.id.to_s %>">Ask</span></a><!-- <span class="caret panel-caret"></span> -->
             </div>
             <div class="panel-body unasked-question-body panel-body-toggle">
-              <ul>
+              <ul class="options">
                 <li>A: <%= question.option_a %></li>
                 <li>B: <%= question.option_b %></li>
                 <li>C: <%= question.option_c %></li>
@@ -126,7 +126,7 @@
   <div class="asked-questions">
     <div class="asked-questions-toggle">
       <h4 class="poll-centre-show-title">
-        asked Questions
+        Asked Questions
       </h4>
       <span class="caret asked-questions-caret">
     </div>
@@ -135,15 +135,25 @@
         <% @asked_questions.each do |question| %>
           <div class="panel panel-default asked-question">
             <div class="panel-heading my-panel-heading panel-heading-toggle">
-              <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3><a class="ask-link" href="#"><span class="ask-button" id="<%= "ask-" + question.id.to_s %>">Ask</span></a><!-- <span class="caret panel-caret"></span> -->
+              <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
             </div>
             <div class="panel-body asked-question-body panel-body-toggle">
-              <ul>
+              <ul class="asked-options">
                 <li>A: <%= question.option_a %></li>
                 <li>B: <%= question.option_b %></li>
                 <li>C: <%= question.option_c %></li>
                 <li>D: <%= question.option_d %></li>
               </ul>
+              <div class="result-numbers">
+                <ul>
+                  <% if question.total_votes > 0 %>
+                    <li><%= "#{question.a_votes} (#{number_to_percentage(question.a_votes.to_f / question.total_votes * 100, precision: 1)})" %></li>
+                    <li><%= "#{question.b_votes} (#{number_to_percentage(question.b_votes.to_f / question.total_votes * 100, precision: 1)})" %></li>
+                    <li><%= "#{question.c_votes} (#{number_to_percentage(question.c_votes.to_f / question.total_votes * 100, precision: 1)})" %></li>
+                    <li><%= "#{question.d_votes} (#{number_to_percentage(question.d_votes.to_f / question.total_votes * 100, precision: 1)})" %></li>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
         <% end %>
@@ -237,10 +247,10 @@ var endSuccess = function(data, status, xhr) {
   var cPercent = "";
   var dPercent = "";
   if(sum > 0) {
-    aPercent = "(" + data.option_a_votes/sum  + "%)";
-    bPercent = "(" + data.option_b_votes/sum  + "%)";
-    cPercent = "(" + data.option_c_votes/sum  + "%)";
-    dPercent = "(" + data.option_d_votes/sum  + "%)";
+    aPercent = "(" + Math.round(data.option_a_votes/sum * 100 *10) / 10  + "%)";
+    bPercent = "(" + Math.round(data.option_b_votes/sum * 100 *10) / 10 + "%)";
+    cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
+    dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
   }
 
   $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");

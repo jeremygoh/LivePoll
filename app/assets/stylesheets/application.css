@@ -320,3 +320,7 @@ p {
 .result-numbers ul {
    list-style-type: none;
 }
+
+.asked-options {
+  display: inline-block;
+}
