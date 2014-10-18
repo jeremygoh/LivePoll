@@ -1,30 +1,31 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy, :ask, :end_question]
+  before_action :set_question, only: [:destroy, :ask, :end_question]
+  before_filter :signed_in_or_redirect
+
   # GET /questions
-  # GET /questions.json
-  def index
-    @questions = Question.all
-  end
+  # # GET /questions.json
+  # def index
+  #   @questions = Question.all
+  # end
 
-  # GET /questions/1
-  # GET /questions/1.json
-  def show
-  end
+  # # GET /questions/1
+  # # GET /questions/1.json
+  # def show
+  # end
 
-  # GET /questions/new
-  def new
-    @question = Question.new
-  end
+  # # GET /questions/new
+  # def new
+  #   @question = Question.new
+  # end
 
-  # GET /questions/1/edit
-  def edit
-  end
+  # # GET /questions/1/edit
+  # def edit
+  # end
 
   # POST /questions
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-
     respond_to do |format|
       if @question.save
         # format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -38,17 +39,17 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
-  def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :bad_request }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @question.update(question_params)
+  #       format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @question }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @question.errors, status: :bad_request }
+  #     end
+  #   end
+  # end
 
   # DELETE /questions/1
   # DELETE /questions/1.json

@@ -36,4 +36,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def answer_poll_centres
+    #find all vote A questions, vote b questions ...
+    #find all poll_cenres from there, do uniq
+
+    output=[]
+    questions = []
+    questions.push(VoteA.where(user_id: self.id))
+    questions.push(VoteB.where(user_id: self.id))
+    questions.push(VoteC.where(user_id: self.id))
+    questions.push(VoteD.where(user_id: self.id))
+    questions.flatten!
+    if !questions.empty?
+      questions.each do |question|
+        poll_centre = PollCentre.find(question.poll_centre_id)
+        output.push(poll_centre)
+      end
+    end
+
+    output.uniq
+  end
+
 end

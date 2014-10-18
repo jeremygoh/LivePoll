@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
+  before_filter :signed_in_or_redirect
+  before_filter :signed_in_or_redirect
+
+
 
   def vote
     @question = Question.find(params[:id])
     @vote_selection = params[:vote_letter]
     channel_name = PollCentre.find(@question.poll_centre_id).title
-    @user = User.last #need to find user by id passed through
+    @user = current_user
     question_id = params[:id]
 
     voted_already = @user.has_voted?(question_id)
@@ -97,16 +101,16 @@ class UsersController < ApplicationController
       end
     end
   end
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  end
+  # # GET /users
+  # # GET /users.json
+  # def index
+  #   @users = User.all
+  # end
 
   # GET /users/1
-  # GET /users/1.json
-  def show
-  end
+  # # GET /users/1.json
+  # def show
+  # end
 
   # GET /users/new
   def new

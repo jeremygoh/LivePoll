@@ -1,30 +1,32 @@
 class VoteAsController < ApplicationController
-  before_action :set_vote_a, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_vote_a, only: [:destroy]
+  validates_presence :user_id, :question_id
+  before_filter :signed_in_or_redirect
   # GET /vote_as
   # GET /vote_as.json
-  def index
-    @vote_as = VoteA.all
-  end
+  # def index
+  #   @vote_as = VoteA.all
+  # end
 
-  # GET /vote_as/1
-  # GET /vote_as/1.json
-  def show
-  end
+  # # GET /vote_as/1
+  # # GET /vote_as/1.json
+  # def show
+  # end
 
-  # GET /vote_as/new
-  def new
-    @vote_a = VoteA.new
-  end
+  # # GET /vote_as/new
+  # def new
+  #   @vote_a = VoteA.new
+  # end
 
-  # GET /vote_as/1/edit
-  def edit
-  end
+  # # GET /vote_as/1/edit
+  # def edit
+  # end
 
   # POST /vote_as
   # POST /vote_as.json
   def create
     @vote_a = VoteA.new(vote_a_params)
+    @vote_a.user_id = current_user.id
 
     respond_to do |format|
       if @vote_a.save
@@ -37,19 +39,19 @@ class VoteAsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vote_as/1
-  # PATCH/PUT /vote_as/1.json
-  def update
-    respond_to do |format|
-      if @vote_a.update(vote_a_params)
-        format.html { redirect_to @vote_a, notice: 'Vote a was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vote_a }
-      else
-        format.html { render :edit }
-        format.json { render json: @vote_a.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /vote_as/1
+  # # PATCH/PUT /vote_as/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @vote_a.update(vote_a_params)
+  #       format.html { redirect_to @vote_a, notice: 'Vote a was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @vote_a }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @vote_a.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /vote_as/1
   # DELETE /vote_as/1.json

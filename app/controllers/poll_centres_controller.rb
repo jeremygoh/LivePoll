@@ -1,6 +1,6 @@
 class PollCentresController < ApplicationController
   before_action :set_poll_centre, only: [:edit, :update, :destroy]
-
+  before_filter :signed_in_or_redirect
   # GET /poll_centres
   # GET /poll_centres.json
   def index
@@ -18,11 +18,15 @@ class PollCentresController < ApplicationController
   end
 
   def show
-    #TO DO: if admin should redirect to admin version
+    @user = current_user
     @poll_centre = PollCentre.find_by(title: params[:title])
+    if current_user.id == @poll_centre.id
+      redirect_to @poll_centre.title  #shouldn't be voting on their own page
+    end
+
     @current_question = @poll_centre.current_question
     @asked_questions = @poll_centre.asked_questions
-    @user = User.last
+
     if @current_question != nil
       @selected_answer = @user.selected_answer(@current_question.id)
     else
@@ -33,6 +37,12 @@ class PollCentresController < ApplicationController
   # GET /poll_centres/new
   def new
     @poll_centre = PollCentre.new
+    @user_answer_poll_centres = nil
+    if user_signed_in?
+      @user = current_user
+      @user_answer_poll_centres = @user.answer_poll_centres
+    end
+
   end
 
   # GET /poll_centres/1/edit
@@ -43,7 +53,7 @@ class PollCentresController < ApplicationController
   # POST /poll_centres.json
   def create
     @poll_centre = PollCentre.new(poll_centre_params)
-
+    @poll_centre.user_id = current_user.id
     respond_to do |format|
       if @poll_centre.save
         format.html { redirect_to "/#{@poll_centre.title}/admin", notice: 'Poll centre was successfully created.' }

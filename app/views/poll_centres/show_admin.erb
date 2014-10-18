@@ -75,7 +75,7 @@
             <span class="radio-answer">D <input type="radio" name="question[answer]" value="4"></span>
           </div>
 
-          <input id="question_poll_centre_id" name="question[poll_centre_id]" type="hidden" value="1" />
+          <input id="question_poll_centre_id" name="question[poll_centre_id]" type="hidden" value="<%= @poll_centre.id%>" />
 
           <div class="actions">
             <input name="commit" type="submit" value="Create Question" />
@@ -399,6 +399,9 @@ $("#new_question").submit(function() {
   $.ajax({
     type: 'post',
     dataType:'text',
+    beforeSend: function(jqXHR, settings) {
+        jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
     data: $("#new_question").serialize(),
     url:'/questions',
     success: newSuccess,

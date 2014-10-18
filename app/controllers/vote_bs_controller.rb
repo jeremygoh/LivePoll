@@ -1,30 +1,33 @@
 class VoteBsController < ApplicationController
-  before_action :set_vote_b, only: [:show, :edit, :update, :destroy]
+  before_action :set_vote_b, only: [:destroy]
+  validates_presence :user_id, :question_id
+  before_filter :signed_in_or_redirect
 
   # GET /vote_bs
   # GET /vote_bs.json
-  def index
-    @vote_bs = VoteB.all
-  end
+  # def index
+  #   @vote_bs = VoteB.all
+  # end
 
-  # GET /vote_bs/1
-  # GET /vote_bs/1.json
-  def show
-  end
+  # # GET /vote_bs/1
+  # # GET /vote_bs/1.json
+  # def show
+  # end
 
-  # GET /vote_bs/new
-  def new
-    @vote_b = VoteB.new
-  end
+  # # GET /vote_bs/new
+  # def new
+  #   @vote_b = VoteB.new
+  # end
 
-  # GET /vote_bs/1/edit
-  def edit
-  end
+  # # GET /vote_bs/1/edit
+  # def edit
+  # end
 
   # POST /vote_bs
   # POST /vote_bs.json
   def create
     @vote_b = VoteB.new(vote_b_params)
+    @vote_b.user_id = current_user.id
 
     respond_to do |format|
       if @vote_b.save
@@ -39,17 +42,17 @@ class VoteBsController < ApplicationController
 
   # PATCH/PUT /vote_bs/1
   # PATCH/PUT /vote_bs/1.json
-  def update
-    respond_to do |format|
-      if @vote_b.update(vote_b_params)
-        format.html { redirect_to @vote_b, notice: 'Vote b was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vote_b }
-      else
-        format.html { render :edit }
-        format.json { render json: @vote_b.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @vote_b.update(vote_b_params)
+  #       format.html { redirect_to @vote_b, notice: 'Vote b was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @vote_b }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @vote_b.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /vote_bs/1
   # DELETE /vote_bs/1.json
