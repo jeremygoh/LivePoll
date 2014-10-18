@@ -21,6 +21,9 @@ class PollCentresController < ApplicationController
     #TO DO: if admin should redirect to admin version
     @poll_centre = PollCentre.find_by(title: params[:title])
     @current_question = @poll_centre.current_question
+    @asked_questions = @poll_centre.asked_questions
+    @user = User.last
+    @selected_answer = @user.selected_answer(@current_question.id)
   end
 
   # GET /poll_centres/new

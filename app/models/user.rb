@@ -6,7 +6,21 @@ class User < ActiveRecord::Base
   has_many :vote_d
 
   def has_voted?(question_id)
-    VoteA.where(user_id: self.id).exists? || VoteB.where(user_id: self.id).exists? || VoteC.where(user_id: self.id).exists? ||VoteD.where(user_id: self.id).exists?
+    VoteA.where(user_id: self.id, question_id: question_id).exists? || VoteB.where(user_id: self.id, question_id: question_id).exists? || VoteC.where(user_id: self.id, question_id: question_id).exists? ||VoteD.where(user_id: self.id, question_id: question_id).exists?
+  end
+
+  def selected_answer(question_id)
+    if VoteA.where(user_id: self.id, question_id: question_id).exists?
+      "A"
+    elsif VoteB.where(user_id: self.id, question_id: question_id).exists?
+      "B"
+    elsif VoteC.where(user_id: self.id, question_id: question_id).exists?
+      "C"
+    elsif VoteD.where(user_id: self.id, question_id: question_id).exists?
+      "D"
+    else
+      nil
+    end
   end
 
 end

@@ -103,16 +103,16 @@ class QuestionsController < ApplicationController
       @question.finished = true
       if @question.save
         channel_name = PollCentre.find(@question.poll_centre_id).title
-        Pusher["#{channel_name}"].trigger('question-start', {
+        Pusher["#{channel_name}"].trigger('question-end', {
           question_text: @question.text,
           option_a: @question.option_a,
           option_b: @question.option_b,
           option_c: @question.option_c,
           option_d: @question.option_d,
-          votes_a: @question.a_votes,
-          votes_b: @question.b_votes,
-          votes_c: @question.c_votes,
-          votes_d: @question.d_votes,
+          option_a_votes: @question.a_votes,
+          option_b_votes: @question.b_votes,
+          option_c_votes: @question.c_votes,
+          option_d_votes: @question.d_votes,
           total_votes: @question.a_votes +  @question.b_votes + @question.c_votes + @question.d_votes,
           correct_answer: @question.correct_answer
         })

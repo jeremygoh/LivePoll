@@ -20,13 +20,12 @@
         </ul>
         <div class="vote-options-container">
           <ul class="vote-options">
-            <li class="vote-option vote-option-a"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='a'>A</button></li>
-            <li class="vote-option vote-option-b"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='b'>B</button></li>
-            <li class="vote-option vote-option-c"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='c'>C</button></li>
-            <li class="vote-option vote-option-d"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='d'>D</button></li>
+            <li class="vote-option vote-option-a"><button href="#" <% if !@selected_answer.nil? && @selected_answer=="A"%> class ='btn vote-btn selected-vote-btn' <% else %> class='btn vote-btn'<% end %> question-id="<%= @current_question.id %>" value='a'>A</button></li>
+            <li class="vote-option vote-option-b"><button href="#" <% if !@selected_answer.nil? && @selected_answer=="B"%> class ='btn vote-btn selected-vote-btn' <% else %> class ='btn vote-btn'<% end %> question-id="<%= @current_question.id %>" value='b'>B</button></li>
+            <li class="vote-option vote-option-c"><button href="#" <% if !@selected_answer.nil? && @selected_answer=="C"%> class ='btn vote-btn selected-vote-btn' <% else %>class ='btn vote-btn' <% end %> question-id="<%= @current_question.id %>" value='c'>C</button></li>
+            <li class="vote-option vote-option-d"><button href="#" <% if !@selected_answer.nil? && @selected_answer=="D"%> class ='btn vote-btn selected-vote-btn' <% else %>class ='btn vote-btn' <% end %> question-id="<%= @current_question.id %>" value='d'>D</button></li>
           </ul>
         </div>
-        <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
       <% elsif %>
         <div class="current-question-prompt">
           <p>No need to refresh. Live questions will appear here as soon as they open.</p>
@@ -35,22 +34,22 @@
     </div>
   </div>
 
-  <div class="answered-questions">
-    <div class="answered-questions-toggle">
+  <div class="asked-questions">
+    <div class="asked-questions-toggle">
       <h4 class="poll-centre-show-title">
-        Answered Questions
+        Asked Questions
       </h4>
-      <span class="caret answered-questions-caret">
+      <span class="caret asked-questions-caret">
     </div>
-    <div class="answered-questions-collection">
-      <% if @answered_questions %>
-        <% @answered_questions.each do |question| %>
-          <div class="panel panel-default answered-question">
+    <div class="asked-questions-collection">
+      <% if @asked_questions %>
+        <% @asked_questions.each do |question| %>
+          <div class="panel panel-default asked-question">
             <div class="panel-heading my-panel-heading panel-heading-toggle">
-              <h3 class="panel-title answered-question-title">Q: <%= question.text %></h3>
+              <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
             </div>
-            <div class="panel-body answered-question-body panel-body-toggle">
-              <ul class="answered-options">
+            <div class="panel-body asked-question-body panel-body-toggle">
+              <ul class="asked-options">
                 <li>A: <%= question.option_a %></li>
                 <li>B: <%= question.option_b %></li>
                 <li>C: <%= question.option_c %></li>
@@ -181,8 +180,43 @@ $(".vote-btn").click(function(e) {
   });
 
   channel.bind('question-end', function(data) {
-    alert(data.message);
+    console.log(data.message);
+    $('#current-question-header').html("Results");
+    $('#current-question-header').css("font-weight", 600);
+    var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
+    $('.current-question-votes').text("Final Vote Count: " + sum);
+
+    var aPercent = "";
+    var bPercent = "";
+    var cPercent = "";
+    var dPercent = "";
+    if(sum > 0) {
+      aPercent = "(" + Math.round(data.option_a_votes/sum * 100 *10) / 10  + "%)";
+      bPercent = "(" + Math.round(data.option_b_votes/sum * 100 *10) / 10 + "%)";
+      cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
+      dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
+    }
+
+    $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
+    $(".options").css("display", "inline-block");
+    $(".end-link").text("");
+    if(sum > 0) {
+      console.log("in prepend");
+      console.log("prepending");
+      console.log('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question_text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.option_a + '</li><li>B: ' + data.option_b + '</li><li>C: ' + data.option_c + '</li><li>D: ' + data.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + "(" + aPercent + ')</li><li>' + data.option_b_votes + '(' + bPercent + ')</li><li>' + data.option_c_votes + '(' + cPercent +')</li><li>' + data.option_d_votes + '(' + dPercent + ')</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p></div>')
+     $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question_text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.option_a + '</li><li>B: ' + data.option_b + '</li><li>C: ' + data.option_c + '</li><li>D: ' + data.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + "(" + aPercent + ')</li><li>' + data.option_b_votes + '(' + bPercent + ')</li><li>' + data.option_c_votes + '(' + cPercent +')</li><li>' + data.option_d_votes + '(' + dPercent + ')</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p></div>');
+    }
+
+    $(".asked-question:first:first-child").click(function(){
+      $(this).nextAll(".panel-body-toggle:first").toggle('slow');
+    });
   });
+
+  $(".asked-questions-toggle").click(function(){
+    $('.asked-questions-collection').toggle('slow');
+  });
+
+
 
   channel.bind('question-vote', function(data) {
     var currentTotal = Number($('.votes-so-far').text());

@@ -11,10 +11,10 @@ class UsersController < ApplicationController
     voted_already = @user.has_voted?(question_id)
     #if user has voted already, find and delete previous vote and create new one as per normal
     if voted_already
-      VoteA.where(id: question_id, user_id: @user.id).destroy_all #refactor!!
-      VoteB.where(id: question_id, user_id: @user.id).destroy_all
-      VoteC.where(id: question_id, user_id: @user.id).destroy_all
-      VoteD.where(id: question_id, user_id: @user.id).destroy_all
+      VoteA.where(question_id: question_id, user_id: @user.id).destroy_all #refactor!!
+      VoteB.where(question_id: question_id, user_id: @user.id).destroy_all
+      VoteC.where(question_id: question_id, user_id: @user.id).destroy_all
+      VoteD.where(question_id: question_id, user_id: @user.id).destroy_all
     end
 
     if @vote_selection == 'a'
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
       @vote.question_id = question_id
       @vote.user_id = @user.id
       if @vote.save
-
         output = {"ok" => "Vote recorded"}
 
         Pusher["#{channel_name}"].trigger('question-vote', {
