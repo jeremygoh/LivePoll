@@ -248,3 +248,12 @@ p {
 .current-question-prompt {
   margin-top: 25px;
 }
+
+.ask-button {
+  float: right;
+  color: black;
+}
+
+.ask-button:hover {
+  color: white;
+}

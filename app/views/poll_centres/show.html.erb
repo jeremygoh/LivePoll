@@ -85,7 +85,7 @@
         <% @unasked_questions.each do |question| %>
           <div class="panel panel-default unasked-question">
             <div class="panel-heading my-panel-heading panel-heading-toggle">
-              <h3 class="panel-title unasked-question-title">Q: <%= question.text %></h3><span class="caret panel-caret"></span>
+              <h3 class="panel-title unasked-question-title">Q: <%= question.text %></h3><a class="ask-link" href="/"><span class="ask-button" id="<%= "ask-" + question.id.to_s %>">Ask</span></a><!-- <span class="caret panel-caret"></span> -->
             </div>
             <div class="panel-body unasked-question-body panel-body-toggle">
               <ul>
@@ -129,6 +129,11 @@ $(".add-question-header-toggle").click(function(){
 
 $(".unasked-questions-toggle").click(function(){
   $('.unasked-questions-collection').toggle('slow');
+});
+
+
+$(".ask-link").click(function( event ) {
+  event.stopPropagation();
 });
 
 
