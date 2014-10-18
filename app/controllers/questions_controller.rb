@@ -31,6 +31,8 @@ class QuestionsController < ApplicationController
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
+        p "errors are "
+        p @question.errors
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end

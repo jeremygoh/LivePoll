@@ -1,11 +1,78 @@
-<p id="notice"><%= notice %></p>
-
 <div class="poll-centre-container">
+  <div class="current-question">
+    <div class="current-question-content">
+      <h4 id="current-question-title">Current Question - <span style="color: green">LIVE!</span></h4>
+<!--       show current question here with options, if none then show last answered question with answers
+      if no questions, small to add -->
+      <% if !@poll_centre.has_current_question? && !@poll_centre.has_unasked_questions? %>
+        <p>You don't seem to have any questions yet. Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
+      <% end %>
+    </div>
+  </div>
 
-  <h4 class="poll-center-show-title">
-    <%= @poll_centre.title %>
-  </h4>
+  <div class="new-questions">
+    <div class="add-question">
+      <h4 class="poll-centre-show-title">
+        Create a question
+      </h4>
 
-  <%= link_to 'Edit', edit_poll_centre_path(@poll_centre) %> |
-  <%= link_to 'Back', poll_centres_path %>
+      <%= form_for(@question, remote: true) do |f| %>
+        <% if @question.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+            <ul>
+            <% @question.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <label>Question</label>
+          <%= f.text_field :text, :class => "new-question-text-input", :required => true%>
+        </div>
+        <div class="field">
+          <label>Option A</label>
+          <%= f.text_field :option_a, :class => "new-question-text-input", :required => true %>
+        </div>
+        <div class="field">
+          <label>Option B</label>
+          <%= f.text_field :option_b, :class => "new-question-text-input", :required => true %>
+        </div>
+        <div class="field">
+          <label>Option C</label>
+          <%= f.text_field :option_c, :class => "new-question-text-input" %>
+        </div>
+        <div class="field">
+          <label>Option D</label>
+          <%= f.text_field :option_d, :class => "new-question-text-input" %>
+        </div>
+
+        <%= f.hidden_field :poll_centre_id, value: @poll_centre.id %>
+
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+
+
+    </div>
+    <div class="unasked-questions">
+      <h4 class="poll-centre-show-title">
+        Unasked Questions
+      </h4>
+      all your unasked questions, collapsed
+    </div>
+  </div>
+
+  <div class="asked-questions">
+    <h4 class="poll-centre-show-title">
+      Previously asked questions
+    </h4>
+    already asked questions, collapsed, can see results
+  </div>
+
+
 </div>

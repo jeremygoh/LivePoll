@@ -16,7 +16,7 @@
 
 body {
   background-color: rgb(231, 231, 231) !important;
-  font-family: 'Roboto Slab', Helvetica, sans-serif !important;
+  font-family: Merriweather, Helvetica, sans-serif !important;
 
 }
 
@@ -32,6 +32,7 @@ body {
 
 #brand {
   font-size: 1.3em;
+  z-index: 100;
 }
 
 #nav-bar-right a {
@@ -47,7 +48,7 @@ body {
 
 .main-container {
   margin: auto;
-  width: 1000px;
+  max-width: 800px;
 }
 
 .home-title{
@@ -57,12 +58,16 @@ body {
 
 
 p {
-  font-family: 'Roboto Slab', Helvetica, sans-serif;
+  font-family: 'Merriweather', Helvetica, sans-serif;
+  word-wrap: break-word !important;
+
 }
 
 .intro-text {
-  font-size: 1.3em;
-  font-weight: 300;
+  font-size: 1.0em;
+  font-weight: 100;
+  font-family: Merriweather;
+  word-wrap: break-word;
 }
 
 .title-input {
@@ -70,10 +75,14 @@ p {
 }
 .field_with_errors {
   background-color: white !important;
+  text-align: center;
+  margin : 0 auto;
+
 }
 
 .new-poll-centre-form {
   text-align: center;
+  margin-top: 35px;
 }
 
 #nav-bar-background {
@@ -97,7 +106,66 @@ p {
 
 
 .poll-centre-container {
-  background: white;
-  min-height: 300px;
   border-radius: 10px;
+}
+
+.current-question {
+  min-height: 100px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.new-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+
+}
+
+.add-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.unasked-questions {
+
+}
+
+.asked-questions {
+  background-color: white;
+  margin: 10px;
+}
+
+#create-page-button {
+  font-weight: 400;
+  margin-top: 20px;
+  color: #fff;
+  background-color: rgb(42, 178, 123);
+  background-image: none;
+}
+
+#current-question-title {
+
+}
+
+.current-question-content {
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.new-question-text-input {
+  width: 70%;
+      border: 1px solid #DADADA;
+    color: #888;
+    line-height:15px;
+    box-shadow: inset 0px 1px 4px #ECECEC;
+    -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+    -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+
+.field label {
+  font-weight: 200;
 }

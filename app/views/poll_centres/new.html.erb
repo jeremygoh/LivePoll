@@ -1,12 +1,12 @@
 <div class="container-fluid home-intro-container">
-  <h1 class="home-title">Poll Centre</h1>
+  <h1 class="home-title">Ask away...</h1>
 
   <%#= render 'form' %>
 
 
     <% if @poll_centre.errors.any? %>
 
-    <div class="alert alert-danger alert-dismissible" role="alert">
+    <div class="alert alert-warning" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       <ul>
       <% @poll_centre.errors.full_messages.each do |message| %>
@@ -26,10 +26,10 @@
 
       <div class="field">
         <%#= f.label :title %><br>
-        <%= f.text_field :title, :placeholder => "Your page title e.g. Comic-con", class: "title-input"%>
+        <%= f.text_field :title, :placeholder => "e.g. comic-con-qa-2014", class: "title-input"%>
       </div>
       <div class="actions">
-        <button class="btn btn-lg btn-success" type="submit">Create your page!</button>
+        <button class="btn btn-success" id="create-page-button" type="submit">Create your page!</button>
       </div>
     <% end %>
   </div>

@@ -11,6 +11,7 @@ class PollCentresController < ApplicationController
   # GET /poll_centres/1.json
   def show
     @poll_centre = PollCentre.find_by(title: params[:title])
+    @question = Question.new
   end
 
   # GET /poll_centres/new
@@ -29,7 +30,7 @@ class PollCentresController < ApplicationController
 
     respond_to do |format|
       if @poll_centre.save
-        format.html { redirect_to @poll_centre, notice: 'Poll centre was successfully created.' }
+        format.html { redirect_to "/#{@poll_centre.title}", notice: 'Poll centre was successfully created.' }
         format.json { render :show, status: :created, location: @poll_centre }
       else
         format.html { render :new }
