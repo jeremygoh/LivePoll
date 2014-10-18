@@ -2,7 +2,8 @@
   <h1 class="home-title">Poll Centre</h1>
 
   <%#= render 'form' %>
-  <%= form_for(@poll_centre) do |f| %>
+
+
     <% if @poll_centre.errors.any? %>
 
     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -17,15 +18,19 @@
     <% end %>
 
     <p class="intro-text">
-      Great real responses live. Create a page for your lecture/class/presentation/event/conference and start asking questions now
+        Great real responses live. Create a page for your lecture/class/presentation/event/conference and start asking questions now
     </p>
 
-    <div class="field">
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </div>
-    <div class="actions">
-      <button class="btn btn-lg btn-success" type="submit">Create your page!</button>
-    </div>
-  <% end %>
+  <div class="new-poll-centre-form">
+    <%= form_for(@poll_centre) do |f| %>
+
+      <div class="field">
+        <%#= f.label :title %><br>
+        <%= f.text_field :title, :placeholder => "Your page title e.g. Comic-con", class: "title-input"%>
+      </div>
+      <div class="actions">
+        <button class="btn btn-lg btn-success" type="submit">Create your page!</button>
+      </div>
+    <% end %>
+  </div>
 </div>

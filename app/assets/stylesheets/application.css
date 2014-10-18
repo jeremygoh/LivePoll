@@ -26,6 +26,7 @@ body {
   background-color: white;
   min-height: 300px;
   border-radius: 8px;
+
 }
 
 .home-title{
@@ -43,6 +44,13 @@ p {
   font-weight: 300;
 }
 
+.title-input {
+  min-width: 35%;
+}
 .field_with_errors {
   background-color: white !important;
+}
+
+.new-poll-centre-form {
+  text-align: center;
 }
