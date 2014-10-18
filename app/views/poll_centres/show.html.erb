@@ -20,10 +20,10 @@
         </ul>
         <div class="vote-options-container">
           <ul class="vote-options">
-            <li class="vote-option vote-option-a"><button href="#" class='btn vote-btn' value='a'>A</button></li>
-            <li class="vote-option vote-option-b"><button href="#" class='btn vote-btn' value='b'>B</button></li>
-            <li class="vote-option vote-option-c"><button href="#" class='btn vote-btn' value='c'>C</button></li>
-            <li class="vote-option vote-option-d"><button href="#" class='btn vote-btn' value='d'>D</button></li>
+            <li class="vote-option vote-option-a"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='a'>A</button></li>
+            <li class="vote-option vote-option-b"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='b'>B</button></li>
+            <li class="vote-option vote-option-c"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='c'>C</button></li>
+            <li class="vote-option vote-option-d"><button href="#" class='btn vote-btn' question-id="<%= @current_question.id %>" value='d'>D</button></li>
           </ul>
         </div>
         <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
@@ -138,6 +138,26 @@ $(".answered-questions-toggle").click(function(){
 //   $(".end-link").text("");
 // }
 
+$(".vote-btn").click(function(e) {
+    e.preventDefault();
+    var questionId = $(this).attr("question-id");
+    var voteLetter = $(this).attr("value");
+    console.log(questionId);
+    var thisObject = this;
+    $.ajax({
+      type: "POST",
+      url: "/questions/" + questionId + "/vote/" + voteLetter,
+      error: function(xhr, status, error) {
+        console.log(xhr);
+        var resp = JSON.parse(xhr.responseText);
+        alert(resp.error);
+      },
+      success: function(data, status, xhr) {
+        $(thisObject).attr("selected-vote", voteLetter);
+      }
+      // dataType: dataType
+    });
+});
 </script>
 
 <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
