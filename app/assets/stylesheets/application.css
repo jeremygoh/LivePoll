@@ -257,3 +257,20 @@ p {
 .ask-button:hover {
   color: white;
 }
+
+#current-question-header {
+  display: inline-block;
+}
+
+.current-question-votes {
+  float: right;
+  padding-right: 5px;
+}
+
+.current-question-text {
+  font-weight: 200;
+}
+
+.votes-so-far {
+  padding: 0 5px;
+}

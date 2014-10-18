@@ -13,6 +13,7 @@ class PollCentresController < ApplicationController
     @poll_centre = PollCentre.find_by(title: params[:title])
     @question = Question.new
     @unasked_questions = @poll_centre.unasked_questions
+    @current_question = @poll_centre.current_question
   end
 
   # GET /poll_centres/new

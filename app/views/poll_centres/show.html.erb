@@ -1,10 +1,20 @@
 <div class="poll-centre-container">
   <div class="current-question">
     <div class="current-question-content">
-      <h4 id="current-question-title">Current Question - <span style="color: green">LIVE!</span></h4>
 <!--       show current question here with options, if none then show last answered question with answers
       if no questions, small to add -->
-      <% if !@poll_centre.has_current_question? && !@poll_centre.has_unasked_questions? %>
+      <% if @current_question %>
+        <h4 id="current-question-header">Current Question - <span style="color: green">LIVE!</span></h4>
+        <h4 class="current-question-votes">Votes so far: <span class="votes-so-far"><%= @current_question.total_votes %></span></h4>
+
+        <h4 class="current-question-text"><%= @current_question.text %></h4>
+        <ul>
+          <li>A: <%= @current_question.option_a %></li>
+          <li>B: <%= @current_question.option_b %></li>
+          <li>C: <%= @current_question.option_c %></li>
+          <li>D: <%= @current_question.option_d %></li>
+        </ul>
+      <% elsif !@poll_centre.has_unasked_questions? %>
         <p class="current-question-prompt">You don't seem to have any questions yet. Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
       <% elsif @poll_centre.has_unasked_questions? %>
         <p class="current-question-prompt">You have questions just waiting to be asked!</p>
