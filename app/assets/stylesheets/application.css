@@ -40,12 +40,14 @@ body {
 }
 
 .home-intro-container {
-  width: 1000px;
-  margin: auto;
   background-color: white;
   min-height: 300px;
   border-radius: 8px;
+}
 
+.main-container {
+  margin: auto;
+  width: 1000px;
 }
 
 .home-title{
@@ -76,4 +78,26 @@ p {
 
 #nav-bar-background {
   background-color: white;
+}
+
+
+/*poll center show*/
+
+#poll-centre-show-title {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  margin: auto;
+  margin-top: 1%;
+  font-weight: 300;
+  font-size: 1.1em;
+  font-family: Lato;
+}
+
+
+.poll-centre-container {
+  background: white;
+  min-height: 300px;
+  border-radius: 10px;
 }
