@@ -23,7 +23,11 @@ class PollCentresController < ApplicationController
     @current_question = @poll_centre.current_question
     @asked_questions = @poll_centre.asked_questions
     @user = User.last
-    @selected_answer = @user.selected_answer(@current_question.id)
+    if @current_question != nil
+      @selected_answer = @user.selected_answer(@current_question.id)
+    else
+      @selected_answer = nil
+    end
   end
 
   # GET /poll_centres/new

@@ -84,7 +84,8 @@ class QuestionsController < ApplicationController
           option_a: @question.option_a,
           option_b: @question.option_b,
           option_c: @question.option_c,
-          option_d: @question.option_d
+          option_d: @question.option_d,
+          question_id: @question.id
         })
         respond_to do |format|
           format.json { render json: @question, status: :ok }

@@ -176,7 +176,34 @@ $(".vote-btn").click(function(e) {
   var pusher = new Pusher('043534b3fe26ce050e53');
   var channel = pusher.subscribe(channelName);
   channel.bind('question-start', function(data) {
-    alert(data.message);
+    console.log(data);
+  $('.current-question').html('<div class="current-question"><div class="current-question-top"> <h4 id="current-question-header">Current Question - <span style="color: green">LIVE!</span> </h4> <h4 class="current-question-votes">Votes: <span class="votes-so-far">0</span></h4> </div> <div class="current-question-content"> <h4 class="current-question-text">Q: ' + data.question_text + '</h4> <ul class="options"><li class="option-a">A: ' + data.option_a +'</li> <li class="option-b">B: ' + data.option_b +'</li> <li class="option-c">C: ' +data.option_c + '</li> <li class="option-d">D: '+data.option_d + '</li></ul> <div class="vote-options-container"> <ul class="vote-options"> <li class="vote-option vote-option-a"><button href="#" class="btn vote-btn" question-id="' + data.question_id +'" value="a">A</button></li> <li class="vote-option vote-option-b"><button href="#" class="btn vote-btn" question-id="' + data.question_id +'" value="b">B</button></li> <li class="vote-option vote-option-c"><button href="#" class="btn vote-btn" question-id="' +data.question_id + '" value="c">C</button></li> <li class="vote-option vote-option-d"><button href="#" class="btn vote-btn" question-id="' +data.question_id + '" value="d">D</button></li> </ul> </div> </div> </div>');
+
+    $(".vote-btn").click(function(e) {
+        e.preventDefault();
+        var questionId = $(this).attr("question-id");
+        var voteLetter = $(this).attr("value");
+        console.log(questionId);
+        var thisObject = this;
+        $.ajax({
+          type: "POST",
+          url: "/questions/" + questionId + "/vote/" + voteLetter,
+          error: function(xhr, status, error) {
+            console.log(xhr);
+            var resp = JSON.parse(xhr.responseText);
+            alert(resp.error);
+          },
+          success: function(data, status, xhr) {
+            //remove attribute from any that hae it
+            $(".selected-vote-btn").removeClass("selected-vote-btn");
+
+            selected = voteLetter; //global scope??!!!
+            $(thisObject).addClass("selected-vote-btn");
+          }
+          // dataType: dataType
+        });
+    });
+
   });
 
   channel.bind('question-end', function(data) {
