@@ -26,6 +26,6 @@ class PollCentre < ActiveRecord::Base
   end
 
   def asked_questions
-    Question.where(poll_centre_id: self.id, started: true, finished: true)
+    Question.where(poll_centre_id: self.id, started: true, finished: true).order("updated_at desc")
   end
 end

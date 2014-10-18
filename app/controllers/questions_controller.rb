@@ -114,7 +114,7 @@ class QuestionsController < ApplicationController
           votes_c: @question.c_votes,
           votes_d: @question.d_votes,
           total_votes: @question.a_votes +  @question.b_votes + @question.c_votes + @question.d_votes,
-          correct_answer: @question.answer
+          correct_answer: @question.correct_answer
         })
         respond_to do |format|
           format.json { render json: @question.results, status: :ok }

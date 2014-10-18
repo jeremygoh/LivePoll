@@ -39,7 +39,7 @@ class Question < ActiveRecord::Base
 
   #in letter format
   def correct_answer
-    (self.answer + 96).chr
+    (self.answer + 96).chr.upcase
   end
 
 end
