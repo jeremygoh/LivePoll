@@ -292,7 +292,8 @@ p {
 }
 
 .current-question-text {
-  font-weight: 200;
+  font-weight: bold;
+
 }
 
 .votes-so-far {
@@ -325,6 +326,16 @@ p {
   display: inline-block;
   float: right;
 }
+
+.options {
+  padding: 0;
+  list-style-type: none;
+  font-family: Merriweather;
+  font-size: 1.0em;
+  margin-top: 25px;
+  margin-bottom: -10px;
+}
+
 
 /*user*/
 
