@@ -1,0 +1,339 @@
+/* line 1, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a {
+  color: #000;
+}
+/* line 23, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a:visited {
+  color: #666;
+}
+/* line 26, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 33, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 38, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#notice {
+  color: green;
+}
+
+/* line 42, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 48, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 55, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 65, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+body {
+  background-color: rgb(231, 231, 231) !important;
+  font-family: Merriweather, Helvetica, sans-serif !important;
+
+}
+
+#main-nav {
+  font-weight: 500;
+  color: black;
+}
+
+#main-nav a {
+  font-weight: 500;
+  color: black;
+}
+
+#brand {
+  font-size: 1.3em;
+  z-index: 100;
+}
+
+#nav-bar-right a {
+  font-size: 1.0em;
+  font-weight: 700;
+}
+
+.home-intro-container {
+  background-color: white;
+  min-height: 300px;
+  border-radius: 8px;
+}
+
+.main-container {
+  margin: auto;
+  max-width: 800px;
+}
+
+.home-title{
+  color: #33a6b8;
+/*  font-family: Lato, serif;
+*/}
+
+
+p {
+  font-family: 'Merriweather', Helvetica, sans-serif;
+  word-wrap: break-word !important;
+
+}
+
+.intro-text {
+  font-size: 1.0em;
+  font-weight: 100;
+  font-family: Merriweather;
+  word-wrap: break-word;
+}
+
+.title-input {
+  min-width: 35%;
+}
+.field_with_errors {
+  background-color: white !important;
+  text-align: center;
+  margin : 0 auto;
+
+}
+
+.new-poll-centre-form {
+  text-align: center;
+  margin-top: 35px;
+}
+
+#nav-bar-background {
+  background-color: white;
+}
+
+
+/*poll center show*/
+
+#poll-centre-show-title {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  margin: auto;
+  margin-top: 1%;
+  font-weight: 300;
+  font-size: 1.1em;
+  font-family: Lato;
+}
+
+
+.poll-centre-container {
+  border-radius: 10px;
+}
+
+.current-question {
+  min-height: 100px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.new-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.add-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.unasked-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.unasked-question {
+  margin-bottom: -2px !important;
+}
+
+.asked-questions {
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+#create-page-button {
+  font-weight: 400;
+  margin-top: 20px;
+  color: #fff;
+  background-color: rgb(42, 178, 123);
+  background-image: none;
+}
+
+#current-question-title {
+
+}
+
+.current-question-content {
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.new-question-text-input {
+  width: 70%;
+      border: 1px solid #DADADA;
+    color: #888;
+    line-height:15px;
+    box-shadow: inset 0px 1px 4px #ECECEC;
+    -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+    -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+
+.field label {
+  font-weight: 200;
+}
+
+#new_question {
+  display: none;
+}
+
+.radio-answer {
+  padding: 10px;
+}
+
+.my-panel-heading {
+  background-image: none !important;
+}
+
+.panel-default>.panel-heading {
+  background-color: white !important;
+}
+
+.panel-default>.panel-heading:hover {
+  background-color: #428bca !important;
+  color: white !important;
+}
+.panel-title {
+  display: inline-block;
+}
+
+.panel-caret {
+  float:right;
+  margin-top: 10px;
+}
+
+.panel-body-toggle {
+  display: none;
+}
+
+.add-more-questions {
+  display: none;
+}
+
+.poll-centre-show-title {
+  display: inline-block;
+}
+
+.add-question-caret {
+  float: right;
+  margin-right: 15px;
+  margin-top: 5px;
+  margin-top: 10px;
+}
+
+.unasked-questions-caret {
+  float: right;
+  margin-right: 16px;
+  margin-top: 16px;
+}
+
+.unasked-questions-collection {
+  display: none;
+}
+
+.current-question-prompt {
+  margin-top: 25px;
+}
+
+.ask-button {
+  float: right;
+  color: black;
+}
+
+.ask-button:hover {
+  color: white;
+}
