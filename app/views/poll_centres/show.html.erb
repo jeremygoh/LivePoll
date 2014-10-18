@@ -2,19 +2,21 @@
   <div class="current-question">
 <!--       show current question here with options, if none then show last answered question with answers
       if no questions, small to add -->
-    <h4 id="current-question-header">Current Question <% if @current_question %>- <span style="color: green">LIVE!</span> <% end %></h4>
-    <% if @current_question %>
-      <h4 class="current-question-votes">Votes: <span class="votes-so-far"><%= @current_question.total_votes %></span></h4>
-    <% end %>
+    <div class="current-question-top">
+      <h4 id="current-question-header">Current Question <% if @current_question %>- <span style="color: green">LIVE!</span> <% end %></h4>
+      <% if @current_question %>
+        <h4 class="current-question-votes">Votes: <span class="votes-so-far"><%= @current_question.total_votes %></span></h4>
+      <% end %>
+    </div>
 
     <div class="current-question-content">
       <% if @current_question %>
         <h4 class="current-question-text">Q: <%= @current_question.text %></h4>
-        <ul>
-          <li>A: <%= @current_question.option_a %></li>
-          <li>B: <%= @current_question.option_b %></li>
-          <li>C: <%= @current_question.option_c %></li>
-          <li>D: <%= @current_question.option_d %></li>
+        <ul class='options'>
+          <li class="option-a">A: <%= @current_question.option_a %></li>
+          <li class="option-b">B: <%= @current_question.option_b %></li>
+          <li class="option-c">C: <%= @current_question.option_c %></li>
+          <li class="option-d">D: <%= @current_question.option_d %></li>
         </ul>
         <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
       <% elsif !@poll_centre.has_unasked_questions? %>
@@ -133,7 +135,9 @@
 
 var askSuccess = function(data, status, xhr) {
   console.log(data);
-  $(".current-question-content").html("<h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a>");
+  $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
+     + "sdsd" + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
+  // $(".current-question").html("<h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4><div class='current-question-content'><h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div>");
   $(".end-button").click(function(e) {
     e.preventDefault();
     var questionId = $(this).attr("id").split('-')[1];
@@ -150,7 +154,6 @@ var askSuccess = function(data, status, xhr) {
       // dataType: dataType
     });
   });
-  $("#current-question-header").after("<h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4>")
 
   //replace current-question-content with ...
 };
@@ -199,6 +202,30 @@ $(".ask-link").click(function( event ) {
 
 var endSuccess = function(data, status, xhr) {
   console.log(data);
+  $('#current-question-header').html("Results");
+  $('#current-question-header').css("font-weight", 600);
+  var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
+  $('.current-question-votes').text("Final Vote Count: " + sum);
+
+  var aPercent = "";
+  var bPercent = "";
+  var cPercent = "";
+  var dPercent = "";
+  if(sum > 0) {
+    aPercent = "(" + data.option_a_votes/sum  + "%)";
+    bPercent = "(" + data.option_b_votes/sum  + "%)";
+    cPercent = "(" + data.option_c_votes/sum  + "%)";
+    dPercent = "(" + data.option_d_votes/sum  + "%)";
+  }
+
+  $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
+  $(".options").css("display", "inline-block");
+  // $(".option-a").append("<span class='option-result'>" + data.option_a_votes + aPercent + "</span>");
+  // $(".option-b").append("<span class='option-result'>" + data.option_b_votes + bPercent + "</span>");
+  // $(".option-c").append("<span class='option-result'>" + data.option_c_votes + cPercent + "</span>");
+  // $(".option-d").append("<span class='option-result'>" + data.option_d_votes + dPercent + "</span>");
+
+  //remove from current
 }
 
 $(".end-button").click(function(e) {
@@ -226,6 +253,7 @@ $(document).ready(function(){
     $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><a class='ask-link' href='#'><span class='ask-button' id='ask-" + status.id +"'>Ask</span></a></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
     $('#new_question').trigger('reset').hide();
     $('.add-more-questions').toggle();
+    $('.unasked-questions-collection').show('slow');
     $(".unasked-questions-collection:last-child").click(function() {
       $(this).nextAll(".panel-body-toggle:first").toggle('slow');
     })
