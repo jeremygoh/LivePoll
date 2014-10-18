@@ -42,12 +42,23 @@ class User < ActiveRecord::Base
 
     output=[]
     questions = []
-    questions.push(VoteA.where(user_id: self.id))
-    questions.push(VoteB.where(user_id: self.id))
-    questions.push(VoteC.where(user_id: self.id))
-    questions.push(VoteD.where(user_id: self.id))
-    questions.flatten!
+    votes = []
+
+    votes.push(VoteA.where(user_id: self.id))
+    votes.push(VoteB.where(user_id: self.id))
+    votes.push(VoteC.where(user_id: self.id))
+    votes.push(VoteD.where(user_id: self.id))
+
+    if !votes.empty?
+      votes.flatten!
+      votes.each do |vote|
+        question = Question.find(vote.question_id)
+        questions.push(question)
+      end
+    end
+
     if !questions.empty?
+      questions.flatten!
       questions.each do |question|
         poll_centre = PollCentre.find(question.poll_centre_id)
         output.push(poll_centre)
