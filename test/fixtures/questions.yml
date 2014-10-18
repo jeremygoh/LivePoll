@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  option_a: MyString
+  option_b: MyString
+  option_c: MyString
+  option_d: MyString
+  started: false
+  finished: false
+  poll_centre_id: 
+
+two:
+  text: MyString
+  option_a: MyString
+  option_b: MyString
+  option_c: MyString
+  option_d: MyString
+  started: false
+  finished: false
+  poll_centre_id: 
