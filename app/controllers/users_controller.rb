@@ -1,6 +1,73 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def vote
+    @question = Question.find(params[:id])
+    @vote_selection = params[:vote_letter]
+
+    if @vote_selection == 'a'
+      @vote = VoteA.new
+      @vote.question_id = params[:id]
+      if @vote.save
+        output = {"ok" => "Vote recorded"}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :ok }
+        end
+      else
+        output = {"error" => "Couldn't record vote."}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :bad_request }
+        end
+      end
+    elsif @vote_selection == 'b'
+      @vote = VoteB.new
+      @vote.question_id = params[:id]
+      if @vote.save
+        output = {"ok" => "Vote recorded"}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :ok }
+        end
+      else
+        output = {"error" => "Couldn't record vote."}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :bad_request }
+        end
+      end
+    elsif @vote_selection == 'c'
+      @vote = VoteC.new
+      @vote.question_id = params[:id]
+      if @vote.save
+        output = {"ok" => "Vote recorded"}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :ok }
+        end
+      else
+        output = {"error" => "Couldn't record vote."}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :bad_request }
+        end
+      end
+    elsif @vote_selection == 'd'
+      @vote = VoteD.new
+      @vote.question_id = params[:id]
+      if @vote.save
+        output = {"ok" => "Vote recorded"}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :ok }
+        end
+      else
+        output = {"error" => "Couldn't record vote."}
+        respond_to do |format|
+          format.json { render json: output.to_json, status: :bad_request }
+        end
+      end
+    else
+      output = {"error" => "Couldn't record vote. Malformed request"}
+      respond_to do |format|
+        format.json { render json: output.to_json, status: :bad_request }
+      end
+    end
+  end
   # GET /users
   # GET /users.json
   def index

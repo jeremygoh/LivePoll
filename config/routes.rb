@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get ":title" => "poll_centres#show"
 
+  post 'questions/:id/vote/:vote_letter' => 'users#vote'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
