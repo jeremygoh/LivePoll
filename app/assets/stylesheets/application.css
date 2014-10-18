@@ -321,6 +321,10 @@ p {
   display: inline-block;
 }
 
+.answered-total-votes {
+  display: inline-block;
+  float: right;
+}
 
 /*user*/
 

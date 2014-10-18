@@ -167,6 +167,7 @@
           <div class="panel panel-default asked-question">
             <div class="panel-heading my-panel-heading panel-heading-toggle">
               <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
+              <span class="answered-total-votes">Total Votes: <%= question.total_votes %></span>
             </div>
             <div class="panel-body asked-question-body panel-body-toggle">
               <ul class="asked-options">
@@ -185,6 +186,7 @@
                   <% end %>
                 </ul>
               </div>
+              <p>Correct Answer: <%= question.correct_answer.upcase %></p>
             </div>
           </div>
         <% end %>
