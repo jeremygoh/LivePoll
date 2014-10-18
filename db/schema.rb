@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018025228) do
+ActiveRecord::Schema.define(version: 20141018025619) do
 
   create_table "poll_centres", force: true do |t|
     t.string   "title"
@@ -46,5 +46,45 @@ ActiveRecord::Schema.define(version: 20141018025228) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "vote_as", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vote_as", ["question_id"], name: "index_vote_as_on_question_id"
+  add_index "vote_as", ["user_id"], name: "index_vote_as_on_user_id"
+
+  create_table "vote_bs", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vote_bs", ["question_id"], name: "index_vote_bs_on_question_id"
+  add_index "vote_bs", ["user_id"], name: "index_vote_bs_on_user_id"
+
+  create_table "vote_cs", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vote_cs", ["question_id"], name: "index_vote_cs_on_question_id"
+  add_index "vote_cs", ["user_id"], name: "index_vote_cs_on_user_id"
+
+  create_table "vote_ds", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vote_ds", ["question_id"], name: "index_vote_ds_on_question_id"
+  add_index "vote_ds", ["user_id"], name: "index_vote_ds_on_user_id"
 
 end

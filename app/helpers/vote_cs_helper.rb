@@ -1,0 +1,2 @@
+module VoteCsHelper
+end
