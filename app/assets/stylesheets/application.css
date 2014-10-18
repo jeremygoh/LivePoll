@@ -193,10 +193,6 @@ p {
   font-weight: 200;
 }
 
-#new_question {
-  display: none;
-}
-
 .radio-answer {
   padding: 10px;
 }
@@ -247,9 +243,9 @@ p {
   margin-top: 16px;
 }
 
-.unasked-questions-collection {
+/*.unasked-questions-collection {
   display: none;
-}
+}*/
 
 .asked-questions-caret {
   float: right;
