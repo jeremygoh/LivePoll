@@ -5,14 +5,29 @@ class UsersController < ApplicationController
     @question = Question.find(params[:id])
     @vote_selection = params[:vote_letter]
     channel_name = PollCentre.find(@question.poll_centre_id).title
+    @user = User.last #need to find user by id passed through
+    question_id = params[:id]
+
+    voted_already = @user.has_voted?(question_id)
+    #if user has voted already, find and delete previous vote and create new one as per normal
+    if voted_already
+      VoteA.where(id: question_id, user_id: @user.id).destroy_all #refactor!!
+      VoteB.where(id: question_id, user_id: @user.id).destroy_all
+      VoteC.where(id: question_id, user_id: @user.id).destroy_all
+      VoteD.where(id: question_id, user_id: @user.id).destroy_all
+    end
+
     if @vote_selection == 'a'
       @vote = VoteA.new
-      @vote.question_id = params[:id]
+      @vote.question_id = question_id
+      @vote.user_id = @user.id
       if @vote.save
+
         output = {"ok" => "Vote recorded"}
-                Pusher["#{channel_name}"].trigger('question-vote', {
+
+        Pusher["#{channel_name}"].trigger('question-vote', {
           status: "ok"
-        })
+        }) unless voted_already
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
@@ -25,11 +40,12 @@ class UsersController < ApplicationController
     elsif @vote_selection == 'b'
       @vote = VoteB.new
       @vote.question_id = params[:id]
+      @vote.user_id = @user.id
       if @vote.save
         output = {"ok" => "Vote recorded"}
-                Pusher["#{channel_name}"].trigger('question-vote', {
+        Pusher["#{channel_name}"].trigger('question-vote', {
           status: "ok"
-        })
+        }) unless voted_already
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
@@ -42,11 +58,12 @@ class UsersController < ApplicationController
     elsif @vote_selection == 'c'
       @vote = VoteC.new
       @vote.question_id = params[:id]
+      @vote.user_id = @user.id
       if @vote.save
         output = {"ok" => "Vote recorded"}
-                Pusher["#{channel_name}"].trigger('question-vote', {
+        Pusher["#{channel_name}"].trigger('question-vote', {
           status: "ok"
-        })
+        }) unless voted_already
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
@@ -59,8 +76,12 @@ class UsersController < ApplicationController
     elsif @vote_selection == 'd'
       @vote = VoteD.new
       @vote.question_id = params[:id]
+      @vote.user_id = @user.id
       if @vote.save
         output = {"ok" => "Vote recorded"}
+        Pusher["#{channel_name}"].trigger('question-vote', {
+          status: "ok"
+        }) unless voted_already
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
