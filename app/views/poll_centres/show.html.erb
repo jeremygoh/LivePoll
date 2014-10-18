@@ -124,11 +124,33 @@
 
 
   <div class="asked-questions">
-    <h4 class="poll-centre-show-title">
-      Previously asked questions
-    </h4>
-    already asked questions, collapsed, can see results
+    <div class="asked-questions-toggle">
+      <h4 class="poll-centre-show-title">
+        asked Questions
+      </h4>
+      <span class="caret asked-questions-caret">
+    </div>
+    <div class="asked-questions-collection">
+      <% if @asked_questions %>
+        <% @asked_questions.each do |question| %>
+          <div class="panel panel-default asked-question">
+            <div class="panel-heading my-panel-heading panel-heading-toggle">
+              <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3><a class="ask-link" href="#"><span class="ask-button" id="<%= "ask-" + question.id.to_s %>">Ask</span></a><!-- <span class="caret panel-caret"></span> -->
+            </div>
+            <div class="panel-body asked-question-body panel-body-toggle">
+              <ul>
+                <li>A: <%= question.option_a %></li>
+                <li>B: <%= question.option_b %></li>
+                <li>C: <%= question.option_c %></li>
+                <li>D: <%= question.option_d %></li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+
 </div>
 
 <script>
@@ -194,6 +216,9 @@ $(".unasked-questions-toggle").click(function(){
   $('.unasked-questions-collection').toggle('slow');
 });
 
+$(".asked-questions-toggle").click(function(){
+  $('.asked-questions-collection').toggle('slow');
+});
 
 $(".ask-link").click(function( event ) {
   event.stopPropagation();

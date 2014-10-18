@@ -14,6 +14,7 @@ class PollCentresController < ApplicationController
     @question = Question.new
     @unasked_questions = @poll_centre.unasked_questions
     @current_question = @poll_centre.current_question
+    @asked_questions = @poll_centre.asked_questions
   end
 
   # GET /poll_centres/new

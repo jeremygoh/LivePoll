@@ -151,9 +151,14 @@ p {
 .asked-questions {
   background-color: white;
   margin: 10px;
+  border-radius: 8px;
   padding: 10px;
   font-family: Merriweather;
   font-size: 1.0em;
+}
+
+.asked-question {
+  margin-bottom: -2px !important;
 }
 
 #create-page-button {
@@ -243,6 +248,16 @@ p {
 }
 
 .unasked-questions-collection {
+  display: none;
+}
+
+.asked-questions-caret {
+  float: right;
+  margin-right: 16px;
+  margin-top: 16px;
+}
+
+.asked-questions-collection {
   display: none;
 }
 
