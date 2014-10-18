@@ -22,6 +22,6 @@ class PollCentre < ActiveRecord::Base
   end
 
   def current_question
-    Question.where(poll_centre_id: self.id, started: false, finished: false).first #there should only be one.. but so we don't return arr
+    Question.where(poll_centre_id: self.id, started: true, finished: false).first #there should only be one.. but so we don't return arr
   end
 end

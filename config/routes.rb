@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   post 'questions/:id/ask' => 'questions#ask'
 
+  post 'questions/:id/end' => 'questions#end_question'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

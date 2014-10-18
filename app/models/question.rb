@@ -26,7 +26,11 @@ class Question < ActiveRecord::Base
 
   #check if q already asked
   def is_asked?
-    self.started != true
+    self.started
+  end
+
+  def is_live?
+    self.started && !self.finished
   end
 
 end

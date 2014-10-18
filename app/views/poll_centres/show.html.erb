@@ -1,23 +1,31 @@
 <div class="poll-centre-container">
   <div class="current-question">
-    <div class="current-question-content">
 <!--       show current question here with options, if none then show last answered question with answers
       if no questions, small to add -->
-      <% if @current_question %>
-        <h4 id="current-question-header">Current Question - <span style="color: green">LIVE!</span></h4>
-        <h4 class="current-question-votes">Votes so far: <span class="votes-so-far"><%= @current_question.total_votes %></span></h4>
+    <h4 id="current-question-header">Current Question <% if @current_question %>- <span style="color: green">LIVE!</span> <% end %></h4>
+    <% if @current_question %>
+      <h4 class="current-question-votes">Votes: <span class="votes-so-far"><%= @current_question.total_votes %></span></h4>
+    <% end %>
 
-        <h4 class="current-question-text"><%= @current_question.text %></h4>
+    <div class="current-question-content">
+      <% if @current_question %>
+        <h4 class="current-question-text">Q: <%= @current_question.text %></h4>
         <ul>
           <li>A: <%= @current_question.option_a %></li>
           <li>B: <%= @current_question.option_b %></li>
           <li>C: <%= @current_question.option_c %></li>
           <li>D: <%= @current_question.option_d %></li>
         </ul>
+        <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
       <% elsif !@poll_centre.has_unasked_questions? %>
-        <p class="current-question-prompt">You don't seem to have any questions yet. Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
+        <div class="current-question-prompt">
+          <p>You don't seem to have any questions yet.</p>
+          <p>Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
+        </div>
       <% elsif @poll_centre.has_unasked_questions? %>
-        <p class="current-question-prompt">You have questions just waiting to be asked!</p>
+        <div class="current-question-prompt">
+          <p>Nothing right now... but you have questions just waiting to be asked!</p>
+        </div>
       <% end %>
     </div>
   </div>
@@ -122,6 +130,13 @@
 </div>
 
 <script>
+
+var askSuccess = function(data, status, xhr) {
+  console.log(data);
+  $(".current-question-content").html("<h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul>");
+
+  //replace current-question-content with ...
+};
 //handler for asking a question TODO: bind to newly appended
 $(".ask-button").click(function(e) {
   e.preventDefault();
@@ -133,8 +148,8 @@ $(".ask-button").click(function(e) {
     error: function(xhr, status, error) {
       var resp = JSON.parse(xhr.responseText);
       alert(resp.error);
-    }
-    // success: success,
+    },
+    success: askSuccess
     // dataType: dataType
   });
 });
@@ -164,6 +179,23 @@ $(".ask-link").click(function( event ) {
   event.stopPropagation();
 });
 
+$(".end-button").click(function(e) {
+  e.preventDefault();
+  var questionId = $(this).attr("id").split('-')[1];
+  console.log(questionId);
+  $.ajax({
+    type: "POST",
+    url: "/questions/" + questionId + "/end",
+    error: function(xhr, status, error) {
+      console.log(xhr);
+      var resp = JSON.parse(xhr.responseText);
+      alert(resp.error);
+    }
+    // success: success, TODO:
+    // dataType: dataType
+  });
+});
+
 
 
 //add to bottom of panel on success
@@ -191,8 +223,8 @@ $(document).ready(function(){
         error: function(xhr, status, error) {
           var resp = JSON.parse(xhr.responseText);
           alert(resp.error);
-        }
-        // success: success,
+        },
+        success: askSuccess
         // dataType: dataType
       });
     });

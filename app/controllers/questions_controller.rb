@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy, :ask]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :ask, :end_question]
   # GET /questions
   # GET /questions.json
   def index
@@ -79,7 +79,7 @@ class QuestionsController < ApplicationController
       @question.started = true
       if @question.save
         respond_to do |format|
-          format.json { render json: "Ok", status: :ok }
+          format.json { render json: @question, status: :ok }
         end
       else
         output_error = {"error" => "Couldn't ask question. Please try again."}
@@ -89,6 +89,24 @@ class QuestionsController < ApplicationController
       end
     end
   end
+
+  def end_question
+    if @question.is_live?
+      @question.finished = true
+      if @question.save
+        respond_to do |format|
+          format.json { render json: @question, status: :ok }
+        end
+        return
+      end
+    end
+
+    output_error = {"error" => "Couldn't process your request to end the question."} # better error message needed for diff cases?
+    respond_to do |format|
+      format.json { render json: output_error.to_json, status: :bad_request }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
