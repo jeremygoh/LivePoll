@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: rgb(231, 231, 231) !important;
+  font-family: 'Roboto Slab', Helvetica, sans-serif !important;
+
+}
+
+.home-intro-container {
+  width: 1000px;
+  margin: auto;
+  background-color: white;
+  min-height: 300px;
+  border-radius: 8px;
+}
+
+.home-title{
+  color: #33a6b8;
+/*  font-family: Lato, serif;
+*/}
+
+
+p {
+  font-family: 'Roboto Slab', Helvetica, sans-serif;
+}
+
+.intro-text {
+  font-size: 1.3em;
+  font-weight: 300;
+}
+
+.field_with_errors {
+  background-color: white !important;
+}
