@@ -20,8 +20,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="nav-bar-background" >
       <ul class="nav navbar-nav navbar-right" id="nav-bar-right">
-        <li><a href="#">Sign In</a></li>
-        <li><a href="#">Register</a></li>
+        <% if !user_signed_in? %>
+          <li><a href="/users/sign_in">Sign In</a></li>
+          <li><a href="/users/sign_up">Register</a></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
