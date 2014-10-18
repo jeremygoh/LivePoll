@@ -1,0 +1,21 @@
+<%= form_for(@poll_centre) do |f| %>
+  <% if @poll_centre.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poll_centre.errors.count, "error") %> prohibited this poll_centre from being saved:</h2>
+
+      <ul>
+      <% @poll_centre.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
