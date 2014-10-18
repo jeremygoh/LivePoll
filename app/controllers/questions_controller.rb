@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
         format.json { render json: @question, status: :created, location: @question }
       else
         # format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :bad_request }
       end
     end
   end
@@ -45,7 +45,7 @@ class QuestionsController < ApplicationController
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :bad_request }
       end
     end
   end
@@ -78,6 +78,14 @@ class QuestionsController < ApplicationController
     else
       @question.started = true
       if @question.save
+        channel_name = @poll_centre.title
+        Pusher["#{channel_name}"].trigger('question-start', {
+          question_text: @question.text,
+          option_a: @question.option_a,
+          option_b: @question.option_b,
+          option_c: @question.option_c,
+          option_d: @question.option_d
+        })
         respond_to do |format|
           format.json { render json: @question, status: :ok }
         end
@@ -94,6 +102,20 @@ class QuestionsController < ApplicationController
     if @question.is_live?
       @question.finished = true
       if @question.save
+        channel_name = PollCentre.find(@question.poll_centre_id).title
+        Pusher["#{channel_name}"].trigger('question-start', {
+          question_text: @question.text,
+          option_a: @question.option_a,
+          option_b: @question.option_b,
+          option_c: @question.option_c,
+          option_d: @question.option_d,
+          votes_a: @question.a_votes,
+          votes_b: @question.b_votes,
+          votes_c: @question.c_votes,
+          votes_d: @question.d_votes,
+          total_votes: @question.a_votes +  @question.b_votes + @question.c_votes + @question.d_votes,
+          correct_answer: @question.answer
+        })
         respond_to do |format|
           format.json { render json: @question.results, status: :ok }
         end

@@ -5,6 +5,7 @@ class Result
     @option_b_votes = question.b_votes
     @option_c_votes = question.c_votes
     @option_d_votes = question.d_votes
+    @correct_answer = (question.answer + 96).chr
     @question = question
   end
 end

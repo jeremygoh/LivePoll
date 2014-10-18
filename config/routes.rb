@@ -20,11 +20,13 @@ Rails.application.routes.draw do
   root 'poll_centres#new'
 
 
-  get ":title" => 'poll_centres#show'
+  get ":title/admin" => 'poll_centres#show_admin'
 
   post 'questions/:id/ask' => 'questions#ask'
 
   post 'questions/:id/end' => 'questions#end_question'
+
+  get ":title" => "poll_centres#show"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -320,3 +320,21 @@ p {
 .asked-options {
   display: inline-block;
 }
+
+
+/*user*/
+
+.answered-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
+
+.answered-questions-caret {
+  float: right;
+  margin-right: 16px;
+  margin-top: 16px;
+}

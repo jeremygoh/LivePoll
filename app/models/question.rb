@@ -37,5 +37,9 @@ class Question < ActiveRecord::Base
     Result.new(self)
   end
 
+  #in letter format
+  def correct_answer
+    (self.answer + 96).chr
+  end
 
 end

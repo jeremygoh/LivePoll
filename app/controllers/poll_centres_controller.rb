@@ -9,12 +9,17 @@ class PollCentresController < ApplicationController
 
   # GET /poll_centres/1
   # GET /poll_centres/1.json
-  def show
+  def show_admin
     @poll_centre = PollCentre.find_by(title: params[:title])
     @question = Question.new
     @unasked_questions = @poll_centre.unasked_questions
     @current_question = @poll_centre.current_question
     @asked_questions = @poll_centre.asked_questions
+  end
+
+  def show
+    #TO DO: if admin should redirect to admin version
+    @poll_centre = PollCentre.find_by(title: params[:title])
   end
 
   # GET /poll_centres/new
@@ -33,7 +38,7 @@ class PollCentresController < ApplicationController
 
     respond_to do |format|
       if @poll_centre.save
-        format.html { redirect_to "/#{@poll_centre.title}", notice: 'Poll centre was successfully created.' }
+        format.html { redirect_to "/#{@poll_centre.title}/admin", notice: 'Poll centre was successfully created.' }
         format.json { render :show, status: :created, location: @poll_centre }
       else
         format.html { render :new }

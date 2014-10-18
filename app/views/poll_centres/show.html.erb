@@ -19,176 +19,30 @@
           <li class="option-d">D: <%= @current_question.option_d %></li>
         </ul>
         <a class="end-link" href="#"><span class="end-button" id="<%= "end-" + @current_question.id.to_s %>">End Question</span></a>
-      <% elsif !@poll_centre.has_unasked_questions? %>
+      <% elsif %>
         <div class="current-question-prompt">
-          <p>You don't seem to have any questions yet.</p>
-          <p>Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
-        </div>
-      <% elsif @poll_centre.has_unasked_questions? %>
-        <div class="current-question-prompt">
-          <p>Nothing right now... but you have questions just waiting to be asked!</p>
+          <p>No need to refresh. Live questions will appear here as soon as they open.</p>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="new-questions">
-    <div class="add-question">
-      <div class="add-question-header-toggle">
-        <h4 class="poll-centre-show-title">
-          Add a question
-        </h4><span class="caret add-question-caret"></span>
-      </div>
-      <div class="add-more-questions">
-        <p>Question successfully created.</p>
-        <button class="btn btn-primary add-another-question-btn" >Add another question</button>
-      </div>
-      <% if @current_question || @unasked_questions %>
-        <%= form_for(@question, remote: true, :html => {:style => 'display:none;'}) do |f| %>
-          <% if @question.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-              <ul>
-              <% @question.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <div class="field">
-            <label>Question</label>
-            <%= f.text_field :text, :class => "new-question-text-input", :required => true%>
-          </div>
-          <div class="field">
-            <label>Option A</label>
-            <%= f.text_field :option_a, :class => "new-question-text-input", :required => true %>
-          </div>
-          <div class="field">
-            <label>Option B</label>
-            <%= f.text_field :option_b, :class => "new-question-text-input", :required => true %>
-          </div>
-          <div class="field">
-            <label>Option C</label>
-            <%= f.text_field :option_c, :class => "new-question-text-input" %>
-          </div>
-          <div class="field">
-            <label>Option D</label>
-            <%= f.text_field :option_d, :class => "new-question-text-input" %>
-          </div>
-          <div class="field">
-            <label>Answer</label>
-            <span class="radio-answer">A <input type="radio" name="question[answer]" value="1"></span>
-            <span class="radio-answer">B <input type="radio" name="question[answer]" value="2"></span>
-            <span class="radio-answer">C <input type="radio" name="question[answer]" value="3"></span>
-            <span class="radio-answer">D <input type="radio" name="question[answer]" value="4"></span>
-          </div>
-
-          <%= f.hidden_field :poll_centre_id, value: @poll_centre.id %>
-
-          <div class="actions">
-            <%= f.submit %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= form_for(@question, remote: true) do |f| %>
-          <% if @question.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-              <ul>
-              <% @question.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <div class="field">
-            <label>Question</label>
-            <%= f.text_field :text, :class => "new-question-text-input", :required => true%>
-          </div>
-          <div class="field">
-            <label>Option A</label>
-            <%= f.text_field :option_a, :class => "new-question-text-input", :required => true %>
-          </div>
-          <div class="field">
-            <label>Option B</label>
-            <%= f.text_field :option_b, :class => "new-question-text-input", :required => true %>
-          </div>
-          <div class="field">
-            <label>Option C</label>
-            <%= f.text_field :option_c, :class => "new-question-text-input" %>
-          </div>
-          <div class="field">
-            <label>Option D</label>
-            <%= f.text_field :option_d, :class => "new-question-text-input" %>
-          </div>
-          <div class="field">
-            <label>Answer</label>
-            <span class="radio-answer">A <input type="radio" name="question[answer]" value="1"></span>
-            <span class="radio-answer">B <input type="radio" name="question[answer]" value="2"></span>
-            <span class="radio-answer">C <input type="radio" name="question[answer]" value="3"></span>
-            <span class="radio-answer">D <input type="radio" name="question[answer]" value="4"></span>
-          </div>
-
-          <%= f.hidden_field :poll_centre_id, value: @poll_centre.id %>
-
-          <div class="actions">
-            <%= f.submit %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="unasked-questions">
-    <div class="unasked-questions-toggle">
+  <div class="answered-questions">
+    <div class="answered-questions-toggle">
       <h4 class="poll-centre-show-title">
-        Unasked Questions
+        Answered Questions
       </h4>
-      <span class="caret unasked-questions-caret">
+      <span class="caret answered-questions-caret">
     </div>
-    <div class="unasked-questions-collection" <% if !@unasked_questions || @current_question %> style="display: none" <% end %>>
-      <% if @unasked_questions %>
-        <% @unasked_questions.each do |question| %>
-          <div class="panel panel-default unasked-question">
+    <div class="answered-questions-collection">
+      <% if @answered_questions %>
+        <% @answered_questions.each do |question| %>
+          <div class="panel panel-default answered-question">
             <div class="panel-heading my-panel-heading panel-heading-toggle">
-              <h3 class="panel-title unasked-question-title">Q: <%= question.text %></h3><a class="ask-link" href="#"><span class="ask-button" id="<%= "ask-" + question.id.to_s %>">Ask</span></a><!-- <span class="caret panel-caret"></span> -->
+              <h3 class="panel-title answered-question-title">Q: <%= question.text %></h3>
             </div>
-            <div class="panel-body unasked-question-body panel-body-toggle">
-              <ul class="options">
-                <li>A: <%= question.option_a %></li>
-                <li>B: <%= question.option_b %></li>
-                <li>C: <%= question.option_c %></li>
-                <li>D: <%= question.option_d %></li>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-
-
-  <div class="asked-questions">
-    <div class="asked-questions-toggle">
-      <h4 class="poll-centre-show-title">
-        Asked Questions
-      </h4>
-      <span class="caret asked-questions-caret">
-    </div>
-    <div class="asked-questions-collection">
-      <% if @asked_questions %>
-        <% @asked_questions.each do |question| %>
-          <div class="panel panel-default asked-question">
-            <div class="panel-heading my-panel-heading panel-heading-toggle">
-              <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
-            </div>
-            <div class="panel-body asked-question-body panel-body-toggle">
-              <ul class="asked-options">
+            <div class="panel-body answered-question-body panel-body-toggle">
+              <ul class="answered-options">
                 <li>A: <%= question.option_a %></li>
                 <li>B: <%= question.option_b %></li>
                 <li>C: <%= question.option_c %></li>
@@ -215,158 +69,90 @@
 
 <script>
 
-var askSuccess = function(data, status, xhr) {
-  console.log(data);
-  $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
-     + "sdsd" + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
-  $("#ask-" + data.id).parent().parent().parent().remove();
-  // $(".current-question").html("<h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4><div class='current-question-content'><h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div>");
-  $(".end-button").click(function(e) {
-    e.preventDefault();
-    var questionId = $(this).attr("id").split('-')[1];
-    console.log(questionId);
-    $.ajax({
-      type: "POST",
-      url: "/questions/" + questionId + "/end",
-      error: function(xhr, status, error) {
-        console.log(xhr);
-        var resp = JSON.parse(xhr.responseText);
-        alert(resp.error);
-      },
-      success: endSuccess
-      // dataType: dataType
-    });
-  });
+// var askSuccess = function(data, status, xhr) {
+//   console.log(data);
+//   $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
+//      + "sdsd" + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
+//   $("#ask-" + data.id).parent().parent().parent().remove();
+//   // $(".current-question").html("<h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4><div class='current-question-content'><h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div>");
+//   $(".end-button").click(function(e) {
+//     e.preventDefault();
+//     var questionId = $(this).attr("id").split('-')[1];
+//     console.log(questionId);
+//     $.ajax({
+//       type: "POST",
+//       url: "/questions/" + questionId + "/end",
+//       error: function(xhr, status, error) {
+//         console.log(xhr);
+//         var resp = JSON.parse(xhr.responseText);
+//         alert(resp.error);
+//       },
+//       success: endSuccess
+//       // dataType: dataType
+//     });
+//   });
 
-  //replace current-question-content with ...
-};
-//handler for asking a question TODO: bind to newly appended
-$(".ask-button").click(function(e) {
-  e.preventDefault();
-  var questionId = $(this).attr("id").split('-')[1];
-  $.ajax({
-    type: "POST",
-    url: "/questions/" + questionId + "/ask",
-    error: function(xhr, status, error) {
-      var resp = JSON.parse(xhr.responseText);
-      alert(resp.error);
-    },
-    success: askSuccess
-    // dataType: dataType
-  });
-});
+//   //replace current-question-content with ...
+// };
+
 
 
 $(".panel-heading-toggle").click(function(){
   $(this).nextAll(".panel-body-toggle:first").toggle('slow');
 });
 
-$(".add-another-question-btn").click(function() {
-  $(this).toggle('slow');
-  $('#new_question').toggle('slow');
-})
-
-
-
-$(".add-question-header-toggle").click(function(){
-  $('#new_question').toggle('slow');
-});
-
-$(".unasked-questions-toggle").click(function(){
-  $('.unasked-questions-collection').toggle('slow');
-});
-
-$(".asked-questions-toggle").click(function(){
-  $('.asked-questions-collection').toggle('slow');
-});
-
-$(".ask-link").click(function( event ) {
-  event.stopPropagation();
+$(".answered-questions-toggle").click(function(){
+  $('.answered-questions-collection').toggle('slow');
 });
 
 
-var endSuccess = function(data, status, xhr) {
-  console.log(data);
-  $('#current-question-header').html("Results");
-  $('#current-question-header').css("font-weight", 600);
-  var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
-  $('.current-question-votes').text("Final Vote Count: " + sum);
 
-  var aPercent = "";
-  var bPercent = "";
-  var cPercent = "";
-  var dPercent = "";
-  if(sum > 0) {
-    aPercent = "(" + Math.round(data.option_a_votes/sum * 100 *10) / 10  + "%)";
-    bPercent = "(" + Math.round(data.option_b_votes/sum * 100 *10) / 10 + "%)";
-    cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
-    dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
-  }
+// var endSuccess = function(data, status, xhr) {
+//   console.log(data);
+//   $('#current-question-header').html("Results");
+//   $('#current-question-header').css("font-weight", 600);
+//   var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
+//   $('.current-question-votes').text("Final Vote Count: " + sum);
 
-  $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
-  $(".options").css("display", "inline-block");
-  $(".end-link").text("");
-  // $(".option-a").append("<span class='option-result'>" + data.option_a_votes + aPercent + "</span>");
-  // $(".option-b").append("<span class='option-result'>" + data.option_b_votes + bPercent + "</span>");
-  // $(".option-c").append("<span class='option-result'>" + data.option_c_votes + cPercent + "</span>");
-  // $(".option-d").append("<span class='option-result'>" + data.option_d_votes + dPercent + "</span>");
+//   var aPercent = "";
+//   var bPercent = "";
+//   var cPercent = "";
+//   var dPercent = "";
+//   if(sum > 0) {
+//     aPercent = "(" + Math.round(data.option_a_votes/sum * 100 *10) / 10  + "%)";
+//     bPercent = "(" + Math.round(data.option_b_votes/sum * 100 *10) / 10 + "%)";
+//     cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
+//     dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
+//   }
 
-  //remove from current
-}
+//   $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
+//   $(".options").css("display", "inline-block");
+//   $(".end-link").text("");
+// }
 
-$(".end-button").click(function(e) {
-  e.preventDefault();
-  var questionId = $(this).attr("id").split('-')[1];
-  console.log(questionId);
-  $.ajax({
-    type: "POST",
-    url: "/questions/" + questionId + "/end",
-    error: function(xhr, status, error) {
-      console.log(xhr);
-      var resp = JSON.parse(xhr.responseText);
-      alert(resp.error);
-    },
-    success: endSuccess
-    // dataType: dataType
+</script>
+
+<script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+
+  var channelName = "<%= @poll_centre.title %>";
+  var pusher = new Pusher('043534b3fe26ce050e53');
+  var channel = pusher.subscribe(channelName);
+  channel.bind('question-start', function(data) {
+    alert(data.message);
   });
-});
 
-
-
-//add to bottom of panel on success
-$(document).ready(function(){
-  $('#new_question').on('ajax:success',function(data, status, xhr){
-    $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><a class='ask-link' href='#'><span class='ask-button' id='ask-" + status.id +"'>Ask</span></a></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
-    $('#new_question').trigger('reset').hide();
-    $('.add-more-questions').toggle();
-    $('.unasked-questions-collection').show('slow');
-    $(".unasked-questions-collection:last-child").click(function() {
-      $(this).nextAll(".panel-body-toggle:first").toggle('slow');
-    })
-
-    $(".ask-link").click(function( event ) {
-      event.stopPropagation();
-    });
-
-    $(".ask-button:last").click(function(e) {
-      console.log("bound");
-      e.preventDefault();
-      var questionId = $(this).attr("id").split('-')[1];
-      console.log(questionId);
-      $.ajax({
-        type: "POST",
-        url: "/questions/" + questionId + "/ask",
-        error: function(xhr, status, error) {
-          var resp = JSON.parse(xhr.responseText);
-          alert(resp.error);
-        },
-        success: askSuccess
-        // dataType: dataType
-      });
-    });
-
-  }).on('ajax:error',function(xhr, status, error){
-    alert("There was a problem creating your question. Please try again");
+  channel.bind('question-end', function(data) {
+    alert(data.message);
   });
-});
+
+  channel.bind('question-vote', function(data) {
+    alert(data.message);
+  });
 </script>
