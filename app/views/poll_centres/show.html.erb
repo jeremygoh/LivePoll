@@ -145,6 +145,9 @@ $(document).ready(function(){
     $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><span class='caret panel-caret'></span></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
     $('#new_question').trigger('reset').hide();
     $('.add-more-questions').toggle();
+    $(".unasked-questions-collection:last-child").click(function() {
+      $(this).nextAll(".panel-body-toggle:first").toggle('slow');
+    })
   }).on('ajax:error',function(xhr, status, error){
     alert("There was a problem creating the question. Please try again");
   });
