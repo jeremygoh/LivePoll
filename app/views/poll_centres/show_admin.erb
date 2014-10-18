@@ -427,6 +427,7 @@ $("#new_question").submit(function() {
 
 
   channel.bind('question-vote', function(data) {
+    console.log(currentTotal);
     var currentTotal = Number($('.votes-so-far').text());
     $('.votes-so-far').text(currentTotal+1);
   });
