@@ -1,6 +1,7 @@
 class VoteCsController < ApplicationController
   before_action :set_vote_c, only: [:destroy]
-  validates_presence_of :user_id, :question_id
+  validates_presence_of :user_id
+  validates_presence_of :question_id
   before_filter :signed_in_or_redirect
 
   # GET /vote_cs
