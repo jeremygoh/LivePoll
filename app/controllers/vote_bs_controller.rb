@@ -1,7 +1,6 @@
 class VoteBsController < ApplicationController
   before_action :set_vote_b, only: [:destroy]
-  validates_presence_of :user_id
-  validates_presence_of :question_id
+
   before_filter :signed_in_or_redirect
 
   # GET /vote_bs

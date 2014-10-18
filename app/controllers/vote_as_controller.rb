@@ -1,8 +1,7 @@
 class VoteAsController < ApplicationController
   before_action :set_vote_a, only: [:destroy]
   before_filter :signed_in_or_redirect
-  validates_presence_of :user_id
-  validates_presence_of :question_id
+
 
   # GET /vote_as
   # GET /vote_as.json
