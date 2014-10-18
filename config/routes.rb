@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   devise_for :users
   resources :questions
 
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'poll_centres#new'
+  root 'welcome#index'
 
 
   get ":title/admin" => 'poll_centres#show_admin'

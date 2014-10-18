@@ -1,6 +1,6 @@
 class PollCentresController < ApplicationController
   before_action :set_poll_centre, only: [:edit, :update, :destroy]
-  before_filter :signed_in_or_redirect
+  before_filter :signed_in_or_redirect, except: [:new]
   # GET /poll_centres
   # GET /poll_centres.json
   def index
@@ -39,6 +39,9 @@ class PollCentresController < ApplicationController
 
   # GET /poll_centres/new
   def new
+    if !user_signed_in?
+      redirect_to "welcome#index"
+    end
     @poll_centre = PollCentre.new
     @user_answer_poll_centres = nil
     if user_signed_in?
