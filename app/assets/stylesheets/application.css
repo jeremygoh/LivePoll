@@ -33,11 +33,18 @@ body {
 #brand {
   font-size: 1.3em;
   z-index: 100;
+  font-weight: 700;
+  font-family: Lato;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #nav-bar-right a {
   font-size: 1.0em;
   font-weight: 700;
+    font-family: Lato;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .home-intro-container {
@@ -434,7 +441,7 @@ p {
 .answer-poll-centre-title {
   color: #33a6b8;
   font-family: Merriweather;
-  font-size: 2.5em;
+  font-size: 2.4em;
   font-weight: 500;
   margin-top: -7px;
 }
@@ -452,35 +459,39 @@ p {
 }
 
 .answer-poll-centres {
- list-style-type: none;
-
+  padding-top: 5px;
+  padding-left: 15px;
 }
 
 .answer-poll-centre-link {
    color: black !important;
  font-family: Merriweather !important;
+ font-weight: 100 !important;
 }
 
 .answer-poll-centre-link:hover {
   background-color: white;
   color: black !important;
  font-family: Merriweather !important;
+ font-weight: 100 !important;
 }
 
 .poll-centres {
- list-style-type: none;
-
+    padding-top: 5px;
+  padding-left: 15px;
 }
 
 .poll-centre-link {
    color: black !important;
  font-family: Merriweather !important;
+ font-weight: 100 !important;
 }
 
 .poll-centre-link:hover {
   background-color: white;
   color: black !important;
  font-family: Merriweather !important;
+ font-weight: 100 !important;
 }
 
 .poll-centre-title {
