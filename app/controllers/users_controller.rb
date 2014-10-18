@@ -4,12 +4,15 @@ class UsersController < ApplicationController
   def vote
     @question = Question.find(params[:id])
     @vote_selection = params[:vote_letter]
-
+    channel_name = PollCentre.find(@question.poll_centre_id).title
     if @vote_selection == 'a'
       @vote = VoteA.new
       @vote.question_id = params[:id]
       if @vote.save
         output = {"ok" => "Vote recorded"}
+                Pusher["#{channel_name}"].trigger('question-vote', {
+          status: "ok"
+        })
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
@@ -24,6 +27,9 @@ class UsersController < ApplicationController
       @vote.question_id = params[:id]
       if @vote.save
         output = {"ok" => "Vote recorded"}
+                Pusher["#{channel_name}"].trigger('question-vote', {
+          status: "ok"
+        })
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
@@ -38,6 +44,9 @@ class UsersController < ApplicationController
       @vote.question_id = params[:id]
       if @vote.save
         output = {"ok" => "Vote recorded"}
+                Pusher["#{channel_name}"].trigger('question-vote', {
+          status: "ok"
+        })
         respond_to do |format|
           format.json { render json: output.to_json, status: :ok }
         end
