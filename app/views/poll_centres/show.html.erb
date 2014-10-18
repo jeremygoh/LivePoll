@@ -129,7 +129,11 @@ $(".ask-button").click(function(e) {
   console.log(questionId);
   $.ajax({
     type: "POST",
-    url: "/questions/" + questionId + "/ask"
+    url: "/questions/" + questionId + "/ask",
+    error: function(xhr, status, error) {
+      var resp = JSON.parse(xhr.responseText);
+      alert(resp.error);
+    }
     // success: success,
     // dataType: dataType
   });
@@ -183,7 +187,11 @@ $(document).ready(function(){
       console.log(questionId);
       $.ajax({
         type: "POST",
-        url: "/questions/" + questionId + "/ask"
+        url: "/questions/" + questionId + "/ask",
+        error: function(xhr, status, error) {
+          var resp = JSON.parse(xhr.responseText);
+          alert(resp.error);
+        }
         // success: success,
         // dataType: dataType
       });

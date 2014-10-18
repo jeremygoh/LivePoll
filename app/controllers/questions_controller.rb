@@ -68,12 +68,12 @@ class QuestionsController < ApplicationController
       #then error
       output_error = {"error" => "There is a question currently in progress. Please wait for it to finish"}
       respond_to do |format|
-        format.json { render output_error.to_json, status: :unprocessable_entity }
+        format.json { render json: output_error.to_json, status: :bad_request }
       end
     elsif @question.is_asked?
       output_error = {"error" => "Question already asked"}
       respond_to do |format|
-        format.json { render output_error.to_json, status: :unprocessable_entity }
+        format.json { render json: output_error.to_json, status: :bad_request }
       end
     else
       @question.started = true
@@ -84,7 +84,7 @@ class QuestionsController < ApplicationController
       else
         output_error = {"error" => "Couldn't ask question. Please try again."}
         respond_to do |format|
-          format.json { render json: output_error.to_json, status: :unprocessable_entity }
+          format.json { render json: output_error.to_json, status: :bad_request }
         end
       end
     end
