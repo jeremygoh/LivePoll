@@ -1,5 +1,5 @@
 class PollCentresController < ApplicationController
-  before_action :set_poll_centre, only: [:show, :edit, :update, :destroy]
+  before_action :set_poll_centre, only: [:edit, :update, :destroy]
 
   # GET /poll_centres
   # GET /poll_centres.json
@@ -10,6 +10,7 @@ class PollCentresController < ApplicationController
   # GET /poll_centres/1
   # GET /poll_centres/1.json
   def show
+    @poll_centre = PollCentre.find_by(title: params[:title])
   end
 
   # GET /poll_centres/new
