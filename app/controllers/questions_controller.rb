@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :ask]
   # GET /questions
   # GET /questions.json
   def index
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         # format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        format.json { render json: @question, status: :created, location: @question }
       else
         # format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -57,6 +57,36 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  #ask a question
+  #TO DO: make sure only owner of poll centre which question belongs to can ask a question
+  def ask
+    @poll_centre = PollCentre.find(@question.poll_centre_id)
+    if @poll_centre.has_current_question?
+      #then error
+      output_error = {"error" => "There is a question currently in progress. Please wait for it to finish"}
+      respond_to do |format|
+        format.json { render output_error.to_json, status: :unprocessable_entity }
+      end
+    elsif @question.is_asked?
+      output_error = {"error" => "Question already asked"}
+      respond_to do |format|
+        format.json { render output_error.to_json, status: :unprocessable_entity }
+      end
+    else
+      @question.started = true
+      if @question.save
+        respond_to do |format|
+          format.json { render json: "Ok", status: :ok }
+        end
+      else
+        output_error = {"error" => "Couldn't ask question. Please try again."}
+        respond_to do |format|
+          format.json { render json: output_error.to_json, status: :unprocessable_entity }
+        end
+      end
     end
   end
 

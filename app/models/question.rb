@@ -24,4 +24,9 @@ class Question < ActiveRecord::Base
     a_votes + b_votes + c_votes + d_votes
   end
 
+  #check if q already asked
+  def is_asked?
+    self.started != true
+  end
+
 end
