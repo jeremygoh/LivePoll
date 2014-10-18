@@ -289,7 +289,13 @@ var endSuccess = function(data, status, xhr) {
   $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
   $(".options").css("display", "inline-block");
   $(".end-link").text("");
-  $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question.text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.question.option_a + '</li><li>B: ' + data.question.option_b + '</li><li>C: ' + data.question.option_c + '</li><li>D: ' + data.question.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + "(" + aPercent + ')</li><li>' + data.option_b_votes + '(' + bPercent + ')</li><li>' + data.option_c_votes + '(' + cPercent +')</li><li>' + data.option_d + '(' + dPercent + ')</li></ul></div><p>Correct Answer: ' + data.question.correctAnswer + '</p></div>');
+  if(sum > 0) {
+   $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question.text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.question.option_a + '</li><li>B: ' + data.question.option_b + '</li><li>C: ' + data.question.option_c + '</li><li>D: ' + data.question.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + "(" + aPercent + ')</li><li>' + data.option_b_votes + '(' + bPercent + ')</li><li>' + data.option_c_votes + '(' + cPercent +')</li><li>' + data.option_d_votes + '(' + dPercent + ')</li></ul></div><p>Correct Answer: ' + data.question.correct_answer + '</p></div>');
+  }
+
+  $(".asked-question:first:first-child").click(function(){
+    $(this).nextAll(".panel-body-toggle:first").toggle('slow');
+  });
 
 }
 
@@ -350,7 +356,10 @@ $(".end-button").click(function(e) {
 // });
 
 var newSuccess = function(data, status, xhr){
-    $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><a class='ask-link' href='#'><span class='ask-button' id='ask-" + status.id +"'>Ask</span></a></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
+    console.log("data is", data);
+    var data = JSON.parse(data);
+    console.log("id is", data.id);
+    $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><a class='ask-link' href='#'><span class='ask-button' id='ask-" + data.id +"'>Ask</span></a></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
     $('#new_question').trigger('reset').hide();
     $('.add-more-questions').toggle();
     $('.unasked-questions-collection').show('slow');
