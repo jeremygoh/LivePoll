@@ -23,9 +23,6 @@ class PollCentresController < ApplicationController
   def show
     @user = current_user
     @poll_centre = PollCentre.find_by(title: params[:title])
-    if current_user.id == @poll_centre.id
-      redirect_to  "/#{@poll_centre.title}/admin"  #shouldn't be voting on their own page
-    end
 
     @current_question = @poll_centre.current_question
     @asked_questions = @poll_centre.asked_questions
