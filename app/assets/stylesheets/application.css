@@ -466,3 +466,27 @@ p {
   color: black !important;
  font-family: Merriweather !important;
 }
+
+.poll-centres {
+ list-style-type: none;
+
+}
+
+.poll-centre-link {
+   color: black !important;
+ font-family: Merriweather !important;
+}
+
+.poll-centre-link:hover {
+  background-color: white;
+  color: black !important;
+ font-family: Merriweather !important;
+}
+
+.poll-centre-title {
+  color: #33a6b8;
+  font-family: Merriweather;
+  font-size: 2.5em;
+  font-weight: 500;
+  margin-top: -7px;
+}

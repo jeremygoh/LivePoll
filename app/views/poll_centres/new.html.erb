@@ -11,10 +11,10 @@
 
 <% if @user && !@user.poll_centres.empty? %>
   <div class="container-fluid poll-centres-container">
-    <h4 class="poll-centre-title">Your pages. Ask away...</h4>
+    <h4 class="poll-centre-title">Your pages.</h4>
     <ul class="poll-centres">
       <% @user_answer_poll_centres.each do |poll_centre| %>
-        <li><a href="/poll_centres/<%= poll_centre.title %>/admin"><%= poll_centre.title %></a></li>
+        <li><a class="poll-centre-link" href="/poll_centres/<%= poll_centre.title %>/admin"><%= poll_centre.title %></a></li>
       <% end %>
     </ul>
   </div>
