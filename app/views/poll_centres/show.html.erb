@@ -153,8 +153,10 @@ $(".vote-btn").click(function(e) {
         alert(resp.error);
       },
       success: function(data, status, xhr) {
+        //remove attribute from any that hae it
+        $(".selected-vote-btn").removeClass("selected-vote-btn");
+
         selected = voteLetter; //global scope??!!!
-        $(thisObject).attr("selected-vote", voteLetter);
         $(thisObject).addClass("selected-vote-btn");
       }
       // dataType: dataType
