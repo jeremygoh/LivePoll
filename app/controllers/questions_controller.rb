@@ -95,7 +95,7 @@ class QuestionsController < ApplicationController
       @question.finished = true
       if @question.save
         respond_to do |format|
-          format.json { render json: @question, status: :ok }
+          format.json { render json: @question.results, status: :ok }
         end
         return
       end
@@ -106,7 +106,6 @@ class QuestionsController < ApplicationController
       format.json { render json: output_error.to_json, status: :bad_request }
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

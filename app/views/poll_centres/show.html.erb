@@ -133,7 +133,24 @@
 
 var askSuccess = function(data, status, xhr) {
   console.log(data);
-  $(".current-question-content").html("<h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul>");
+  $(".current-question-content").html("<h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a>");
+  $(".end-button").click(function(e) {
+    e.preventDefault();
+    var questionId = $(this).attr("id").split('-')[1];
+    console.log(questionId);
+    $.ajax({
+      type: "POST",
+      url: "/questions/" + questionId + "/end",
+      error: function(xhr, status, error) {
+        console.log(xhr);
+        var resp = JSON.parse(xhr.responseText);
+        alert(resp.error);
+      },
+      success: endSuccess
+      // dataType: dataType
+    });
+  });
+  $("#current-question-header").after("<h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4>")
 
   //replace current-question-content with ...
 };
@@ -179,6 +196,11 @@ $(".ask-link").click(function( event ) {
   event.stopPropagation();
 });
 
+
+var endSuccess = function(data, status, xhr) {
+  console.log(data);
+}
+
 $(".end-button").click(function(e) {
   e.preventDefault();
   var questionId = $(this).attr("id").split('-')[1];
@@ -190,8 +212,8 @@ $(".end-button").click(function(e) {
       console.log(xhr);
       var resp = JSON.parse(xhr.responseText);
       alert(resp.error);
-    }
-    // success: success, TODO:
+    },
+    success: endSuccess
     // dataType: dataType
   });
 });

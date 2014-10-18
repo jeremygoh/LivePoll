@@ -33,4 +33,9 @@ class Question < ActiveRecord::Base
     self.started && !self.finished
   end
 
+  def results
+    Result.new(self)
+  end
+
+
 end
