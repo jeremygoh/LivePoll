@@ -137,6 +137,7 @@ var askSuccess = function(data, status, xhr) {
   console.log(data);
   $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
      + "sdsd" + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
+  $("#ask-" + data.id).parent().parent().parent().remove();
   // $(".current-question").html("<h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4><div class='current-question-content'><h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div>");
   $(".end-button").click(function(e) {
     e.preventDefault();
@@ -161,7 +162,6 @@ var askSuccess = function(data, status, xhr) {
 $(".ask-button").click(function(e) {
   e.preventDefault();
   var questionId = $(this).attr("id").split('-')[1];
-  console.log(questionId);
   $.ajax({
     type: "POST",
     url: "/questions/" + questionId + "/ask",
@@ -220,6 +220,7 @@ var endSuccess = function(data, status, xhr) {
 
   $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
   $(".options").css("display", "inline-block");
+  $(".end-link").text("");
   // $(".option-a").append("<span class='option-result'>" + data.option_a_votes + aPercent + "</span>");
   // $(".option-b").append("<span class='option-result'>" + data.option_b_votes + bPercent + "</span>");
   // $(".option-c").append("<span class='option-result'>" + data.option_c_votes + cPercent + "</span>");
