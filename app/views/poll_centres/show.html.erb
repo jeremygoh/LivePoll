@@ -45,7 +45,7 @@
       <% if @asked_questions %>
         <% @asked_questions.each do |question| %>
           <div class="panel panel-default asked-question">
-            <div class="panel-heading my-panel-heading panel-heading-toggle">
+            <div class="panel-heading my-panel-heading panel-heading-toggle" <% if @user.correct?(question.id) %>style="background-color:rgb(134, 218, 134) !important; color:white !important"  <% else%>style="background-color: rgb(242, 135, 132) !important; color:white !important"<% end %>>
               <h3 class="panel-title asked-question-title">Q: <%= question.text %></h3>
               <span class="answered-total-votes">Total Votes: <%= question.total_votes %></span>
             </div>

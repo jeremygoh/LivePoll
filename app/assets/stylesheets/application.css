@@ -15,7 +15,7 @@
  */
 
 body {
-  background-color: rgb(231, 231, 231) !important;
+  background-image: url("/retina_wood.png") !important;
   font-family: Merriweather, Helvetica, sans-serif !important;
 
 }

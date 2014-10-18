@@ -23,4 +23,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def correct?(question_id)
+    selected = selected_answer(question_id)
+    if selected.nil?
+      false
+    else
+      selected == Question.find(question_id).correct_answer
+    end
+  end
+
 end
