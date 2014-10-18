@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
   # GET /questions
   # GET /questions.json
   def index
@@ -28,12 +27,10 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        # format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
-        p "errors are "
-        p @question.errors
-        format.html { render :new }
+        # format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
@@ -71,6 +68,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:text, :option_a, :option_b, :option_c, :option_d, :started, :finished, :poll_centre_id)
+      params.require(:question).permit(:text, :option_a, :option_b, :option_c, :option_d, :started, :finished, :answer)
     end
 end

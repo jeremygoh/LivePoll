@@ -169,3 +169,7 @@ p {
 .field label {
   font-weight: 200;
 }
+
+.radio-answer {
+  padding: 10px;
+}

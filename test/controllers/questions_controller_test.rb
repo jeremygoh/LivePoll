@@ -18,7 +18,7 @@ class QuestionsControllerTest < ActionController::TestCase
 
   test "should create question" do
     assert_difference('Question.count') do
-      post :create, question: { finished: @question.finished, option_a: @question.option_a, option_b: @question.option_b, option_c: @question.option_c, option_d: @question.option_d, poll_centre_id: @question.poll_centre_id, started: @question.started, text: @question.text }
+      post :create, question: { answer: @question.answer, finished: @question.finished, option_a: @question.option_a, option_b: @question.option_b, option_c: @question.option_c, option_d: @question.option_d, started: @question.started, text: @question.text }
     end
 
     assert_redirected_to question_path(assigns(:question))
@@ -35,7 +35,7 @@ class QuestionsControllerTest < ActionController::TestCase
   end
 
   test "should update question" do
-    patch :update, id: @question, question: { finished: @question.finished, option_a: @question.option_a, option_b: @question.option_b, option_c: @question.option_c, option_d: @question.option_d, poll_centre_id: @question.poll_centre_id, started: @question.started, text: @question.text }
+    patch :update, id: @question, question: { answer: @question.answer, finished: @question.finished, option_a: @question.option_a, option_b: @question.option_b, option_c: @question.option_c, option_d: @question.option_d, started: @question.started, text: @question.text }
     assert_redirected_to question_path(assigns(:question))
   end
 

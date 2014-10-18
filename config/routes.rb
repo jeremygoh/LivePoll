@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :questions
+
   resources :vote_ds
 
   resources :vote_cs
@@ -6,8 +8,6 @@ Rails.application.routes.draw do
   resources :vote_bs
 
   resources :vote_as
-
-  resources :questions
 
   resources :poll_centres
 

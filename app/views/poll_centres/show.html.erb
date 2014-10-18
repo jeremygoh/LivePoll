@@ -49,6 +49,13 @@
           <label>Option D</label>
           <%= f.text_field :option_d, :class => "new-question-text-input" %>
         </div>
+        <div class="field">
+          <label>Answer</label>
+          <span class="radio-answer">A <input type="radio" name="question[answer]" value="1"></span>
+          <span class="radio-answer">B <input type="radio" name="question[answer]" value="2"></span>
+          <span class="radio-answer">C <input type="radio" name="question[answer]" value="3"></span>
+          <span class="radio-answer">D <input type="radio" name="question[answer]" value="4"></span>
+        </div>
 
         <%= f.hidden_field :poll_centre_id, value: @poll_centre.id %>
 

@@ -8,7 +8,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :option_d
       t.boolean :started
       t.boolean :finished
-      t.references :poll_centre, index: true
+      t.integer :answer
 
       t.timestamps
     end

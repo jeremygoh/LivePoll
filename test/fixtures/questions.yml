@@ -8,7 +8,7 @@ one:
   option_d: MyString
   started: false
   finished: false
-  poll_centre_id: 
+  answer: 1
 
 two:
   text: MyString
@@ -18,4 +18,4 @@ two:
   option_d: MyString
   started: false
   finished: false
-  poll_centre_id: 
+  answer: 1
