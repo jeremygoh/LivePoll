@@ -5,17 +5,24 @@
 <!--       show current question here with options, if none then show last answered question with answers
       if no questions, small to add -->
       <% if !@poll_centre.has_current_question? && !@poll_centre.has_unasked_questions? %>
-        <p>You don't seem to have any questions yet. Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
+        <p class="current-question-prompt">You don't seem to have any questions yet. Did you know studies have shown that polling an audience improves memory retention and engagement?</p>
+      <% elsif @poll_centre.has_unasked_questions? %>
+        <p class="current-question-prompt">You have questions just waiting to be asked!</p>
       <% end %>
     </div>
   </div>
 
   <div class="new-questions">
     <div class="add-question">
-      <h4 class="poll-centre-show-title">
-        Create a question
-      </h4>
-
+      <div class="add-question-header-toggle">
+        <h4 class="poll-centre-show-title">
+          Create a question
+        </h4><span class="caret add-question-caret"></span>
+      </div>
+      <div class="add-more-questions">
+        <p>Question successfully created.</p>
+        <button class="btn btn-primary add-another-question-btn" >Add another question</button>
+      </div>
       <%= form_for(@question, remote: true) do |f| %>
         <% if @question.errors.any? %>
           <div id="error_explanation">
@@ -63,14 +70,17 @@
           <%= f.submit %>
         </div>
       <% end %>
-
-
     </div>
+  </div>
 
-    <div class="unasked-questions">
+  <div class="unasked-questions">
+    <div class="unasked-questions-toggle">
       <h4 class="poll-centre-show-title">
         Unasked Questions
       </h4>
+      <span class="caret unasked-questions-caret">
+    </div>
+    <div class="unasked-questions-collection">
       <% if @unasked_questions %>
         <% @unasked_questions.each do |question| %>
           <div class="panel panel-default unasked-question">
@@ -103,6 +113,35 @@
 
 <script>
 $(".panel-heading-toggle").click(function(){
-  $(this).nextAll(".panel-body-toggle:first").toggle();
+  $(this).nextAll(".panel-body-toggle:first").toggle('slow');
+});
+
+$(".add-another-question-btn").click(function() {
+  $(this).toggle('slow');
+  $('#new_question').toggle('slow');
+})
+
+
+
+$(".add-question-header-toggle").click(function(){
+  $('#new_question').toggle('slow');
+});
+
+$(".unasked-questions-toggle").click(function(){
+  $('.unasked-questions-collection').toggle('slow');
+});
+
+
+
+//add to bottom of panel on success
+$(document).ready(function(){
+  $('#new_question').on('ajax:success',function(data, status, xhr){
+    console.log("successful create");
+    $(".unasked-questions-collection").append("<div class='panel panel-default unasked-question'><div class='panel-heading my-panel-heading panel-heading-toggle'><h3 class='panel-title unasked-question-title'>Q: " + $("#question_text").val() + "</h3><span class='caret panel-caret'></span></div><div class='panel-body unasked-question-body panel-body-toggle'><ul><li>A: " + $("#question_option_a").val() + "</li><li>B: " + $("#question_option_b").val() + "</li><li>C: " + $("#question_option_c").val() + "</li><li>D: " + $("#question_option_d").val() + "</li></ul></div></div>")
+    $('#new_question').trigger('reset').hide();
+    $('.add-more-questions').toggle();
+  }).on('ajax:error',function(xhr, status, error){
+    alert("There was a problem creating the question. Please try again");
+  });
 });
 </script>

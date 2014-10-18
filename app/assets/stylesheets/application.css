@@ -120,22 +120,39 @@ p {
   background-color: white;
   margin: 10px;
   border-radius: 8px;
-
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
 }
 
 .add-questions {
   background-color: white;
   margin: 10px;
   border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
 }
 
 .unasked-questions {
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
+}
 
+.unasked-question {
+  margin-bottom: -2px !important;
 }
 
 .asked-questions {
   background-color: white;
   margin: 10px;
+  padding: 10px;
+  font-family: Merriweather;
+  font-size: 1.0em;
 }
 
 #create-page-button {
@@ -170,6 +187,10 @@ p {
   font-weight: 200;
 }
 
+#new_question {
+  display: none;
+}
+
 .radio-answer {
   padding: 10px;
 }
@@ -179,10 +200,13 @@ p {
 }
 
 .panel-default>.panel-heading {
+  background-color: white !important;
+}
+
+.panel-default>.panel-heading:hover {
   background-color: #428bca !important;
   color: white !important;
 }
-
 .panel-title {
   display: inline-block;
 }
@@ -194,4 +218,33 @@ p {
 
 .panel-body-toggle {
   display: none;
+}
+
+.add-more-questions {
+  display: none;
+}
+
+.poll-centre-show-title {
+  display: inline-block;
+}
+
+.add-question-caret {
+  float: right;
+  margin-right: 15px;
+  margin-top: 5px;
+  margin-top: 10px;
+}
+
+.unasked-questions-caret {
+  float: right;
+  margin-right: 16px;
+  margin-top: 16px;
+}
+
+.unasked-questions-collection {
+  display: none;
+}
+
+.current-question-prompt {
+  margin-top: 25px;
 }
