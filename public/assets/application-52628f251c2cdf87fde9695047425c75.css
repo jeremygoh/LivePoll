@@ -1,3 +1,82 @@
+/* line 1, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a {
+  color: #000;
+}
+/* line 23, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a:visited {
+  color: #666;
+}
+/* line 26, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 33, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 38, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#notice {
+  color: green;
+}
+
+/* line 42, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 48, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 55, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 65, /Users/jeremygoh/dubhacks/LivePoll/app/assets/stylesheets/scaffolds.css.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,9 +89,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+
+
  */
+
 
 body {
   background-image: url("/retina_wood.png") !important;
@@ -311,38 +391,22 @@ text-decoration: none !important;
 }
 
 @media (max-width: 441px) {
-  .current-question-votes {
-       display: block !important;
-       font-size: 1.1em;
-  }
-  #current-question-header {
-       display: block !important;
-       font-size: 1.1em;
-  }
+    .current-question-votes {
+         display: block !important;
+         font-size: 1.1em;
+    }
+    #current-question-header {
+         display: block !important;
+         font-size: 1.1em;
+    }
 
-  .panel-title {
-    font-size: 0.9em !important;
-  }
-  .ask-button {
-    font-size: 0.9em !important;
-  }
+    .panel-title {
+      font-size: 0.9em !important;
+    }
+    .ask-button {
+      font-size: 0.9em !important;
+    }
 }
-
-
-@media (min-width: 455px)and(max-width: 640px) {
-  .vote-btn {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .vote-btn {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-  }
-}
-
 
 .current-question-votes {
   float: right;
@@ -430,9 +494,11 @@ text-decoration: none !important;
 .vote-btn {
   background: white;
   border: 1px solid #A9A9A9 !important;
-  padding-left: 5% !important;
-  padding-right: 5% !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
   border-radius: 8px !important;
+  margin-left: 2px !important;
+  margin-right: 22px !important;
 }
 
 .vote-btn:hover {
