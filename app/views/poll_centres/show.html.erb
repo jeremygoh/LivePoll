@@ -78,34 +78,6 @@
 
 <script>
 
-// var askSuccess = function(data, status, xhr) {
-//   console.log(data);
-//   $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
-//      + "sdsd" + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
-//   $("#ask-" + data.id).parent().parent().parent().remove();
-//   // $(".current-question").html("<h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4><div class='current-question-content'><h4 class='current-question-text'>Q: " + data.text + "</h4><ul><li>A: " + data.option_a + "</li><li>B:" + data.option_b + "</li><li>C:" + data.option_c  + "</li><li>D: " + data.option_d  + "</li></ul><a class='end-link' href='#''><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div>");
-//   $(".end-button").click(function(e) {
-//     e.preventDefault();
-//     var questionId = $(this).attr("id").split('-')[1];
-//     console.log(questionId);
-//     $.ajax({
-//       type: "POST",
-//       url: "/questions/" + questionId + "/end",
-//       error: function(xhr, status, error) {
-//         console.log(xhr);
-//         var resp = JSON.parse(xhr.responseText);
-//         alert(resp.error);
-//       },
-//       success: endSuccess
-//       // dataType: dataType
-//     });
-//   });
-
-//   //replace current-question-content with ...
-// };
-
-
-
 $(".panel-heading-toggle").click(function(){
   $(this).nextAll(".panel-body-toggle:first").toggle('slow');
 });
@@ -114,42 +86,15 @@ $(".answered-questions-toggle").click(function(){
   $('.answered-questions-collection').toggle('slow');
 });
 
-
-
-// var endSuccess = function(data, status, xhr) {
-//   console.log(data);
-//   $('#current-question-header').html("Results");
-//   $('#current-question-header').css("font-weight", 600);
-//   var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
-//   $('.current-question-votes').text("Final Vote Count: " + sum);
-
-//   var aPercent = "";
-//   var bPercent = "";
-//   var cPercent = "";
-//   var dPercent = "";
-//   if(sum > 0) {
-//     aPercent = "(" + Math.round(data.option_a_votes/sum * 100 *10) / 10  + "%)";
-//     bPercent = "(" + Math.round(data.option_b_votes/sum * 100 *10) / 10 + "%)";
-//     cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
-//     dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
-//   }
-
-//   $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + "</li</ul></div>");
-//   $(".options").css("display", "inline-block");
-//   $(".end-link").text("");
-// }
-
 $(".vote-btn").click(function(e) {
     e.preventDefault();
     var questionId = $(this).attr("question-id");
     var voteLetter = $(this).attr("value");
-    console.log(questionId);
     var thisObject = this;
     $.ajax({
       type: "POST",
       url: "/questions/" + questionId + "/vote/" + voteLetter,
       error: function(xhr, status, error) {
-        console.log(xhr);
         var resp = JSON.parse(xhr.responseText);
         alert(resp.error);
       },
@@ -178,21 +123,17 @@ $(".vote-btn").click(function(e) {
   var pusher = new Pusher('043534b3fe26ce050e53');
   var channel = pusher.subscribe(channelName);
   channel.bind('question-start', function(data) {
-    console.log(data);
   $('.current-question').html('<div class="current-question-top"> <h4 id="current-question-header">Current Question - <span style="color: green">LIVE!</span> </h4> <h4 class="current-question-votes">Votes: <span class="votes-so-far">0</span></h4> </div> <div class="current-question-content"> <h4 class="current-question-text">Q: ' + data.question_text + '</h4> <ul class="options"><li class="option-a">A: ' + data.option_a +'</li> <li class="option-b">B: ' + data.option_b +'</li> <li class="option-c">C: ' +data.option_c + '</li> <li class="option-d">D: '+data.option_d + '</li></ul> <div class="vote-options-container"> <ul class="vote-options"> <li class="vote-option vote-option-a"><button href="#" class="btn vote-btn" question-id="' + data.question_id +'" value="a">A</button></li> <li class="vote-option vote-option-b"><button href="#" class="btn vote-btn" question-id="' + data.question_id +'" value="b">B</button></li> <li class="vote-option vote-option-c"><button href="#" class="btn vote-btn" question-id="' +data.question_id + '" value="c">C</button></li> <li class="vote-option vote-option-d"><button href="#" class="btn vote-btn" question-id="' +data.question_id + '" value="d">D</button></li> </ul> </div> </div>');
 
     $(".vote-btn").click(function(e) {
         e.preventDefault();
         var questionId = $(this).attr("question-id");
         var voteLetter = $(this).attr("value");
-        console.log(questionId);
-        console.log()
         var thisObject = this;
         $.ajax({
           type: "POST",
           url: "/questions/" + questionId + "/vote/" + voteLetter,
           error: function(xhr, status, error) {
-            console.log(xhr);
             var resp = JSON.parse(xhr.responseText);
             alert(resp.error);
           },
@@ -210,7 +151,6 @@ $(".vote-btn").click(function(e) {
   });
 
   channel.bind('question-end', function(data) {
-    console.log(data.message);
     $('#current-question-header').html("Results");
     $('#current-question-header').css("font-weight", 600);
     var sum = data.option_a_votes + data.option_b_votes + data.option_c_votes + data.option_d_votes;
@@ -225,7 +165,6 @@ $(".vote-btn").click(function(e) {
       cPercent = "(" + Math.round(data.option_c_votes/sum * 100 *10) / 10 + "%)";
       dPercent = "(" + Math.round(data.option_d_votes/sum * 100 *10) / 10 + "%)";
     }
-    console.log("selected is", window.selected);
     if(window.selected == data.correct_answer.toLowerCase()) {
       $(".options").after("<div class='result-numbers'><ul><li>" + data.option_a_votes + aPercent + "</li><li>"+ data.option_b_votes + bPercent  +"</li><li>" + data.option_c_votes + cPercent + "</li><li>" + data.option_d_votes + dPercent + '</li></ul></div><div class="result-text"><p>Correct Answer: ' + data.correct_answer + '<p>You selected ' + window.selected.toUpperCase() + '. Good job!</div>');
     } else {
