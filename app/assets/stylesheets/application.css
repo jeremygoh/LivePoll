@@ -632,3 +632,7 @@ width: 149px;
 word-spacing: 0px;
 writing-mode: lr-tb;
 }
+
+.form-errors {
+  padding-left: 13px;
+}
