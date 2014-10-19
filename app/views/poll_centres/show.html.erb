@@ -37,11 +37,11 @@
   <div class="asked-questions">
     <div class="asked-questions-toggle">
       <h4 class="poll-centre-show-title">
-        Asked Questions
+        Previously Asked Questions
       </h4>
       <span class="caret asked-questions-caret">
     </div>
-    <div class="asked-questions-collection">
+    <div class="asked-questions-collection" <% if !@asked_questions.empty? && !@current_question %> style="display: block !important;"<% end %>>
       <% if @asked_questions %>
         <% @asked_questions.each do |question| %>
           <div class="panel panel-default asked-question">
