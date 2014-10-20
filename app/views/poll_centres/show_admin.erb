@@ -200,7 +200,7 @@
 
 var askSuccess = function(data, status, xhr) {
   $(".current-question").html("<div class='current-question-top'><h4 id='current-question-header'>Current Question - <span style='color: green'>LIVE!</span></h4><h4 class='current-question-votes'>Votes: <span class='votes-so-far'>0</span></h4></div><div class='current-question-content'><h4 class='current-question-text'>Q: "
-     + data.text + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_b + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
+     + data.text + "</h4><ul class='options'><li class='option-a'>A: " + data.option_a + "</li><li class='option-b'>B: " + data.option_b + "</li><li class='option-c'>C: "+ data.option_c + "</li><li class='option-d'>D: "+ data.option_d +"</li></ul><a class='end-link' href='#'><span class='end-button' id='end-" + data.id + "'>End Question</span></a></div></div>");
   $("#ask-" + data.id).parent().parent().parent().remove();
 
   $(".end-button").click(function(e) {
