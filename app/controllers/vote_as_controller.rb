@@ -5,23 +5,29 @@ class VoteAsController < ApplicationController
 
   # GET /vote_as
   # GET /vote_as.json
-  # def index
-  #   @vote_as = VoteA.all
-  # end
+  def index
+        redirect_to "/"
+    # @vote_as = VoteA.all
+  end
 
   # # GET /vote_as/1
   # # GET /vote_as/1.json
-  # def show
-  # end
+  def show
+
+  end
 
   # # GET /vote_as/new
-  # def new
-  #   @vote_a = VoteA.new
-  # end
+  def new
+    # @vote_a = VoteA.new
+        redirect_to "/"
+
+  end
 
   # # GET /vote_as/1/edit
-  # def edit
-  # end
+  def edit
+        redirect_to "/"
+
+  end
 
   # POST /vote_as
   # POST /vote_as.json
@@ -42,26 +48,29 @@ class VoteAsController < ApplicationController
 
   # # PATCH/PUT /vote_as/1
   # # PATCH/PUT /vote_as/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @vote_a.update(vote_a_params)
-  #       format.html { redirect_to @vote_a, notice: 'Vote a was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @vote_a }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @vote_a.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def update
+        redirect_to "/"
+
+    # respond_to do |format|
+    #   if @vote_a.update(vote_a_params)
+    #     format.html { redirect_to @vote_a, notice: 'Vote a was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @vote_a }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @vote_a.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
 
   # DELETE /vote_as/1
   # DELETE /vote_as/1.json
   def destroy
-    @vote_a.destroy
-    respond_to do |format|
-      format.html { redirect_to vote_as_url, notice: 'Vote a was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to "/"
+    # @vote_a.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to vote_as_url, notice: 'Vote a was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

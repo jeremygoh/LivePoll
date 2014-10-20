@@ -57,11 +57,12 @@ class VoteCsController < ApplicationController
   # DELETE /vote_cs/1
   # DELETE /vote_cs/1.json
   def destroy
-    @vote_c.destroy
-    respond_to do |format|
-      format.html { redirect_to vote_cs_url, notice: 'Vote c was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to "/"
+    # @vote_c.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to vote_cs_url, notice: 'Vote c was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

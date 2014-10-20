@@ -103,14 +103,18 @@ class UsersController < ApplicationController
   end
   # # GET /users
   # # GET /users.json
-  # def index
-  #   @users = User.all
-  # end
+  def index
+    # @users = User.all
+        redirect_to "/"
+
+  end
 
   # GET /users/1
   # # GET /users/1.json
-  # def show
-  # end
+  def show
+        redirect_to "/"
+
+  end
 
   # GET /users/new
   def new
@@ -119,6 +123,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    redirect_to "/"
   end
 
   # POST /users
@@ -140,25 +145,27 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to "/"
+    # respond_to do |format|
+    #   if @user.update(user_params)
+    #     format.html { redirect_to @user, notice: 'User was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @user }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to "/"
+    # @user.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

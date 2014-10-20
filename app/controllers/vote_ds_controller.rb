@@ -4,23 +4,31 @@ class VoteDsController < ApplicationController
 
   # GET /vote_ds
   # # GET /vote_ds.json
-  # def index
-  #   @vote_ds = VoteD.all
-  # end
+  def index
+    # @vote_ds = VoteD.all
+        redirect_to "/"
+
+  end
 
   # # GET /vote_ds/1
   # # GET /vote_ds/1.json
-  # def show
-  # end
+  def show
+        redirect_to "/"
+
+  end
 
   # # GET /vote_ds/new
-  # def new
-  #   @vote_d = VoteD.new
-  # end
+  def new
+    redirect_to "/"
+
+    # @vote_d = VoteD.new
+  end
 
   # # GET /vote_ds/1/edit
-  # def edit
-  # end
+  def edit
+        redirect_to "/"
+
+  end
 
   # POST /vote_ds
   # POST /vote_ds.json
@@ -53,14 +61,19 @@ class VoteDsController < ApplicationController
   #   end
   # end
 
+  def update
+        redirect_to "/"
+  end
+
   # DELETE /vote_ds/1
   # DELETE /vote_ds/1.json
   def destroy
-    @vote_d.destroy
-    respond_to do |format|
-      format.html { redirect_to vote_ds_url, notice: 'Vote d was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to "/"
+    # @vote_d.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to vote_ds_url, notice: 'Vote d was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

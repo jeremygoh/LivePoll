@@ -4,7 +4,7 @@ class PollCentresController < ApplicationController
   # GET /poll_centres
   # GET /poll_centres.json
   def index
-    @poll_centres = PollCentre.all
+    # @poll_centres = PollCentre.all
   end
 
   # GET /poll_centres/1
@@ -23,6 +23,11 @@ class PollCentresController < ApplicationController
   def show
     @user = current_user
     @poll_centre = PollCentre.find_by(title: params[:title])
+
+    if @poll_centre.nil?
+      redirect_to "/"
+      return
+    end
 
     @current_question = @poll_centre.current_question
     @asked_questions = @poll_centre.asked_questions
@@ -50,6 +55,7 @@ class PollCentresController < ApplicationController
 
   # GET /poll_centres/1/edit
   def edit
+    redirect_to "/"
   end
 
   # POST /poll_centres
@@ -85,6 +91,10 @@ class PollCentresController < ApplicationController
   # DELETE /poll_centres/1
   # DELETE /poll_centres/1.json
   def destroy
+    if current_user.id != @poll_centre.user_id
+      redirect_to "/"
+    end
+
     @poll_centre.destroy
     respond_to do |format|
       format.html { redirect_to poll_centres_url, notice: 'Poll centre was successfully destroyed.' }

@@ -5,23 +5,31 @@ class VoteBsController < ApplicationController
 
   # GET /vote_bs
   # GET /vote_bs.json
-  # def index
-  #   @vote_bs = VoteB.all
-  # end
+  def index
+    # @vote_bs = VoteB.all
+        redirect_to "/"
+
+  end
 
   # # GET /vote_bs/1
   # # GET /vote_bs/1.json
-  # def show
-  # end
+  def show
+        redirect_to "/"
+
+  end
 
   # # GET /vote_bs/new
-  # def new
-  #   @vote_b = VoteB.new
-  # end
+  def new
+        redirect_to "/"
+
+    # @vote_b = VoteB.new
+  end
 
   # # GET /vote_bs/1/edit
-  # def edit
-  # end
+  def edit
+        redirect_to "/"
+
+  end
 
   # POST /vote_bs
   # POST /vote_bs.json
@@ -54,14 +62,19 @@ class VoteBsController < ApplicationController
   #   end
   # end
 
+  def update
+    redirect_to "/"
+  end
+
   # DELETE /vote_bs/1
   # DELETE /vote_bs/1.json
   def destroy
-    @vote_b.destroy
-    respond_to do |format|
-      format.html { redirect_to vote_bs_url, notice: 'Vote b was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to "/"
+    # @vote_b.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to vote_bs_url, notice: 'Vote b was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
