@@ -292,8 +292,11 @@ var endSuccess = function(data, status, xhr) {
     $(".asked-questions-collection").prepend('<div class="panel panel-default asked-question"><div class="panel-heading my-panel-heading panel-heading-toggle"><h3 class="panel-title asked-question-title">Q: ' + data.question.text + '</h3><span class="answered-total-votes">Total Votes: ' + sum + '</span></div><div class="panel-body asked-question-body panel-body-toggle"><ul class="asked-options"><li>A: '+ data.question.option_a + '</li><li>B: ' + data.question.option_b + '</li><li>C: ' + data.question.option_c + '</li><li>D: ' + data.question.option_d + '</li></ul><div class="result-numbers"><ul><li>' + data.option_a_votes + '</li><li>' + data.option_b_votes +'</li><li>' + data.option_c_votes + '</li><li>' + data.option_d_votes + '</li></ul></div><p>Correct Answer: ' + data.correct_answer + '</p></div>');
   }
 
-  $(".asked-question:first:first-child").click(function(){
-    $(this).nextAll(".panel-body-toggle:first").toggle('slow');
+  var newPanelHeading = $(".asked-question:first").children()[0];
+  var newPanelBody = $(".asked-question:first").children()[1];
+  console.log("children", $(".asked-question:first").children());
+  $(newPanelHeading).click(function(){
+    $(newPanelBody).toggle('slow');
   });
 
 }
